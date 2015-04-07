@@ -1,0 +1,10 @@
+{
+  "name": "moodle-core_role-permissionsmanager",
+  "builds": {
+    "moodle-core_role-permissionsmanager": {
+      "jsfiles": [
+        "permissionsmanager.js"
+      ]
+    }
+  }
+}

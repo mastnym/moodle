@@ -1,0 +1,12 @@
+{
+  "moodle-core_role-permissionsmanager": {
+    "requires": [
+        "base",
+        "node",
+        "io-base",
+        "json-parse",
+        "moodle-core-notification",
+        "handlebars"
+    ]
+  }
+}

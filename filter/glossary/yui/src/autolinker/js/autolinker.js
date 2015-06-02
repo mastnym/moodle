@@ -17,6 +17,7 @@ AUTOLINKER = function() {
 };
 Y.extend(AUTOLINKER, Y.Base, {
     overlay : null,
+    conceptpanel: null,
     initializer : function() {
         var self = this;
         Y.delegate('click', function(e){
@@ -67,11 +68,14 @@ Y.extend(AUTOLINKER, Y.Base, {
             data = Y.JSON.parse(content);
             if (data.success){
                 this.overlay.hide(); //hide progress indicator
-
+                if (this.conceptpanel) {
+                    this.conceptpanel.hide();
+                }
                 for (key in data.entries) {
                     definition = data.entries[key].definition + data.entries[key].attachments;
                     alertpanel = new M.core.alert({title:data.entries[key].concept,
                         message:definition, modal:false, yesLabel: M.util.get_string('ok', 'moodle')});
+                    this.conceptpanel = alertpanel;
                     alertpanel.show();
                     Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(alertpanel.get('boundingBox')))});
 

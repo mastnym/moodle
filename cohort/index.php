@@ -30,6 +30,7 @@ $contextid = optional_param('contextid', 0, PARAM_INT);
 $page = optional_param('page', 0, PARAM_INT);
 $searchquery  = optional_param('search', '', PARAM_RAW);
 $showall = optional_param('showall', false, PARAM_BOOL);
+$selectall = optional_param('selectall', false, PARAM_BOOL);
 
 require_login();
 
@@ -96,6 +97,13 @@ if ($searchquery) {
 if ($showall) {
     $params['showall'] = true;
 }
+
+if ($selectall) {
+    $params['selectall'] = false;
+} else {
+    $params['selectall'] = true;
+}
+
 $baseurl = new moodle_url('/cohort/index.php', $params);
 
 if ($editcontrols = cohort_edit_controls($context, $baseurl)) {
@@ -126,6 +134,7 @@ $data = array();
 $editcolumnisempty = true;
 foreach($cohorts['cohorts'] as $cohort) {
     $line = array();
+    $line[] = html_writer::checkbox('cohortids[]', $cohort->id, $selectall, '', array('id' => 'cohort_id_' . $cohort->id));
     $cohortcontext = context::instance_by_id($cohort->contextid);
     $cohort->description = file_rewrite_pluginfile_urls($cohort->description, 'pluginfile.php', $cohortcontext->id,
             'cohort', 'description', $cohort->id);
@@ -198,6 +207,10 @@ if ($showall) {
     array_unshift($table->head, get_string('category'));
     array_unshift($table->colclasses, 'leftalign category');
 }
+
+array_unshift($table->head, '');
+array_unshift($table->colclasses, 'centeralign');
+
 if (!$editcolumnisempty) {
     $table->head[] = get_string('edit');
     $table->colclasses[] = 'centeralign action';
@@ -210,6 +223,25 @@ if (!$editcolumnisempty) {
 $table->id = 'cohorts';
 $table->attributes['class'] = 'admintable generaltable';
 $table->data  = $data;
+
+echo html_writer::start_tag('form', array('method' => 'post', 'action' => 'edit.php', 'contextid' => $context->id));
 echo html_writer::table($table);
+echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'delete', 'value' => 1));
+echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'contextid', 'value' => $context->id));
+echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()));
+
+if (!empty($cohorts['cohorts'])) {
+    $controls = html_writer::link($baseurl, get_string('selectallornone', 'form'), array('id' => 'cohorts_check_all_none'));
+    $controls .= html_writer::empty_tag('br');
+    $attributes = array(
+            'type'  => 'submit',
+            'name'  => 'delete',
+            'value' => get_string('delcohorts', 'cohort'));
+    $controls .= html_writer::empty_tag('input', $attributes);
+
+    echo $controls;
+}
+echo html_writer::end_tag('form');
+
 echo $OUTPUT->paging_bar($cohorts['totalcohorts'], $page, 25, $baseurl);
 echo $OUTPUT->footer();

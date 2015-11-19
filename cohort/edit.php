@@ -29,6 +29,8 @@ require_once($CFG->dirroot.'/cohort/edit_form.php');
 
 $id        = optional_param('id', 0, PARAM_INT);
 $contextid = optional_param('contextid', 0, PARAM_INT);
+$cohortids = optional_param_array('cohortids', '', PARAM_SEQUENCE);
+$confirmedcohortids = optional_param('confirmedcohortids', '', PARAM_ALPHANUMEXT);
 $delete    = optional_param('delete', 0, PARAM_BOOL);
 $show      = optional_param('show', 0, PARAM_BOOL);
 $hide      = optional_param('hide', 0, PARAM_BOOL);
@@ -95,6 +97,41 @@ if ($delete and $cohort->id) {
     $yesurl = new moodle_url('/cohort/edit.php', array('id' => $cohort->id, 'delete' => 1,
         'confirm' => 1, 'sesskey' => sesskey(), 'returnurl' => $returnurl->out_as_local_url()));
     $message = get_string('delconfirm', 'cohort', format_string($cohort->name));
+    echo $OUTPUT->confirm($message, $yesurl, $returnurl);
+    echo $OUTPUT->footer();
+    die;
+}
+
+if ($delete && ($cohortids || $confirmedcohortids)) {
+    $PAGE->url->param('delete', 1);
+
+    if ($confirm && $confirmedcohortids && confirm_sesskey()) {
+        $cohortids = explode('_', $confirmedcohortids);
+        $cohorts = $DB->get_records_list('cohort', 'id', $cohortids);
+        foreach ($cohorts as $cohort) {
+            cohort_delete_cohort($cohort);
+        }
+        redirect($returnurl);
+    }
+
+    $cohorts = $DB->get_records_list('cohort', 'id', $cohortids, '', 'id,name');
+    $cohortnames = array();
+    foreach ($cohorts as $cohort) {
+        $cohortnames[] = $cohort->name;
+    }
+
+    $names = implode(', ', $cohortnames);
+    $strheading = get_string('delcohort', 'cohort');
+    $PAGE->navbar->add($strheading);
+    $PAGE->set_title($strheading);
+    $PAGE->set_heading($COURSE->fullname);
+    echo $OUTPUT->header();
+    echo $OUTPUT->heading($strheading);
+    $ids = implode('_', $cohortids);
+
+    $yesurl = new moodle_url('/cohort/edit.php', array('confirmedcohortids' => $ids, 'delete' => 1,
+        'confirm' => 1, 'sesskey' => sesskey(), 'returnurl' => $returnurl->out_as_local_url(), 'contextid' => $context->id));
+    $message = get_string('delconfirm', 'cohort', $names);
     echo $OUTPUT->confirm($message, $yesurl, $returnurl);
     echo $OUTPUT->footer();
     die;

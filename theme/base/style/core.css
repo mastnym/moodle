@@ -10,8 +10,9 @@ strong{font-style:inherit;}em{font-weight:inherit;}
 /**
  * General
  */
-th,
-td,
+ /*moodle inner border problem*/
+/*th,
+td,*/
 a img {border-width:0;}
 acronym,
 abbr {cursor: help;}

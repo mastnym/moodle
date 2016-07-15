@@ -553,7 +553,9 @@ abstract class moodleform {
             //check draft files for validation and flag them if required files
             //are not in draft area.
             $draftfilevalue = $this->validate_draft_files();
-
+            if ($this->_formname == 'question_import_form'){
+                $draftfilevalue=true;
+            }
             if ($file_val !== true && $draftfilevalue !== true) {
                 $file_val = array_merge($file_val, $draftfilevalue);
             } else if ($draftfilevalue !== true) {
@@ -571,6 +573,9 @@ abstract class moodleform {
 
             $data = $mform->exportValues();
             $moodle_val = $this->validation($data, $files);
+            if ($this->_formname == 'question_import_form'){
+                $moodle_val=array();
+            }
             if ((is_array($moodle_val) && count($moodle_val)!==0)) {
                 // non-empty array means errors
                 foreach ($moodle_val as $element=>$msg) {
@@ -651,6 +656,10 @@ abstract class moodleform {
         } else {
             return NULL;
         }
+    }
+
+    function getForm(){
+    	return $this->_form;
     }
 
     /**
@@ -3060,5 +3069,5 @@ MoodleQuickForm::registerElementType('text', "$CFG->libdir/form/text.php", 'Mood
 MoodleQuickForm::registerElementType('textarea', "$CFG->libdir/form/textarea.php", 'MoodleQuickForm_textarea');
 MoodleQuickForm::registerElementType('url', "$CFG->libdir/form/url.php", 'MoodleQuickForm_url');
 MoodleQuickForm::registerElementType('warning', "$CFG->libdir/form/warning.php", 'MoodleQuickForm_warning');
-
+MoodleQuickForm::registerElementType('testlist', "$CFG->dirroot/mod/uach/testlist.php", 'MoodleQuickForm_testlist');
 MoodleQuickForm::registerRule('required', null, 'MoodleQuickForm_Rule_Required', "$CFG->libdir/formslib.php");

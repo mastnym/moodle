@@ -26,6 +26,8 @@
 
 require_once(dirname(__FILE__) . '/../config.php');
 require_once($CFG->dirroot . '/question/editlib.php');
+require_once("$CFG->dirroot/mod/uach/uach_config.php");
+require_once("$CFG->dirroot/question/param_question_plugin/config.php");
 
 list($thispageurl, $contexts, $cmid, $cm, $module, $pagevars) =
         question_edit_setup('questions', '/question/edit.php');
@@ -50,7 +52,12 @@ echo $OUTPUT->header();
 echo '<div class="questionbankwindow boxwidthwide boxaligncenter">';
 $questionbank->display('questions', $pagevars['qpage'], $pagevars['qperpage'],
         $pagevars['cat'], $pagevars['recurse'], $pagevars['showhidden'],
-        $pagevars['qbshowtext']);
+        $pagevars['qbshowtext'],$pagevars['srchtext']);
+if (isset($CFG->param_question_subjects[$COURSE->shortname])){
+	echo '<a href="param_question_plugin/index.php?courseid='.$COURSE->id.'">Vložit parametrickou otázku</a> (Vyžaduje zapnutý Javascript a moderní prohlížeč - IE 10, Firefox 20+, Chrome 25+)';
+  echo '<br/>';
+  echo '<a href="param_question_plugin/sablona.xlsx">Zde si můžete stánout šablonu pro Excel.</a>'   ;
+}
 echo "</div>\n";
 
 echo $OUTPUT->footer();

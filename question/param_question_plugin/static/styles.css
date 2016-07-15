@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#tiny_mce{
+	border:0;
+	}
+#tiny_mce td, #tiny_mce th {
+    border: 0;
+}
+#params{
+	border:1px solid black;
+	}
+td, th { border: 1px solid grey}
+#error,#sendErrors{
+	color: red;
+}
+th {
+    -webkit-transition: text-shadow 1s linear;
+    -moz-transition: text-shadow 1s linear;
+    -ms-transition: text-shadow 1s linear;
+    -o-transition: text-shadow 1s linear;
+    transition: text-shadow 1s linear;
+}
+.glow {
+    
+}
+#displayoptions, h2.main, .createnewquestion, .boxaligncenter, #catmenu, #odeslat,#recap,#categoryquestions,.modulespecificbuttonscontainer,#loading,.paging,#uach_link,#uach_button{
+	display:none;
+}

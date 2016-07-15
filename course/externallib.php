@@ -271,6 +271,15 @@ class core_course_external extends external_api {
                         // Availability date (also send to user who can see hidden module).
                         if ($CFG->enableavailability && ($canviewhidden || $canupdatecourse)) {
                             $module['availability'] = $cm->availability;
+                            $resource=$DB->get_record($cm->modname, array('id'=>$cm->instance), '*', MUST_EXIST);
+                            $module['timemodified']=$resource->timemodified;
+                            
+                            $metadata=$DB->get_record_sql('SELECT metadata FROM {cis_page_metadata} WHERE module_id = ?', array($cm->id));
+                            if (!$metadata){
+                            	$metadata="{}";
+                            }else{$metadata=$metadata->metadata;}
+                            $module['metadata']=$metadata;
+                            
                         }
 
                         $baseurl = 'webservice/pluginfile.php';
@@ -279,6 +288,7 @@ class core_course_external extends external_api {
                         //(each module callback take care about checking the capabilities)
 
                         require_once($CFG->dirroot . '/mod/' . $cm->modname . '/lib.php');
+			/*
                         $getcontentfunction = $cm->modname.'_export_contents';
                         if (function_exists($getcontentfunction)) {
                             if (empty($filters['excludecontents']) and $contents = $getcontentfunction($cm, $baseurl)) {
@@ -287,6 +297,7 @@ class core_course_external extends external_api {
                                 $module['contents'] = array();
                             }
                         }
+			*/
 
                         //assign result to $sectioncontents
                         $sectioncontents[] = $module;
@@ -340,6 +351,8 @@ class core_course_external extends external_api {
                                     'modname' => new external_value(PARAM_PLUGIN, 'activity module type'),
                                     'modplural' => new external_value(PARAM_TEXT, 'activity module plural name'),
                                     'availability' => new external_value(PARAM_RAW, 'module availability settings', VALUE_OPTIONAL),
+                                    'timemodified' => new external_value(PARAM_INT, 'modification of source', VALUE_OPTIONAL),
+                                    'metadata' => new external_value(PARAM_RAW, 'Metadata',VALUE_OPTIONAL),
                                     'indent' => new external_value(PARAM_INT, 'number of identation in the site'),
                                     'contents' => new external_multiple_structure(
                                           new external_single_structure(
@@ -443,6 +456,18 @@ class core_course_external extends external_api {
                 // For backward-compartibility
                 $courseinfo['numsections'] = $courseformatoptions['numsections'];
             }
+	    
+            $modinfo = get_fast_modinfo($course);
+            $sections = get_all_sections($course->id);
+            $counter=0;
+            foreach ($sections as $key => $section) {
+            	foreach ($modinfo->sections[$section->section] as $module){
+            		$counter+=1;
+            	}
+            }
+            $courseinfo['isempty']=($counter < 1 ? 1 : 0);         
+            $courseinfo["url"]=$CFG->wwwroot."/course/view.php?id=$course->id";
+            
 
             //some field should be returned only if the user has update permission
             $courseadmin = has_capability('moodle/course:update', $context);
@@ -516,6 +541,8 @@ class core_course_external extends external_api {
                             'numsections' => new external_value(PARAM_INT,
                                     '(deprecated, use courseformatoptions) number of weeks/topics',
                                     VALUE_OPTIONAL),
+			    'isempty' => new external_value(PARAM_INT, 'is course empty?'),
+                            'url' => new external_value(PARAM_URL, 'Course url'),
                             'maxbytes' => new external_value(PARAM_INT,
                                     'largest size of file that can be uploaded into the course',
                                     VALUE_OPTIONAL),

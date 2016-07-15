@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html ng-app="VideoPrirucka">
+    <head>
+        <title> Průvodce e-learning, VSČHT Praha </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <noscript><div align="center"><h1>Máte vypnutý JavaScript.</h1> Pro správné zobrazení stránek je nutné, aby byl JavaScript zapnutý.</div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></noscript>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="fragment" content="!" />
+        <meta http-equiv="content-language" content="cs"/>
+        <link rel="stylesheet" type="text/css" href="css/screen_wide.css"/>
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/popcorn.min.js"></script>
+        <script src="lib/angular.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/kontroler.js"></script>
+    </head>
+
+    <body ng-controller="VideoPriruckaKontroler">
+        <div id="wrapper">
+            <div id="header">
+                <a href="http://www.vscht.cz"><img src="css/graphic/logo_vscht.png"/></a>
+
+                <div id="elearn">
+                    <a href="#/obsah"><img src="css/graphic/logo_elearn.png"/></a>
+                </div>
+            </div>
+
+            <div id="content" ng-switch on="stav" >
+                <!-- edit standard content here -->
+                <div id="uvod" ng-switch-default>
+                    <!-- uvod -->
+                    <br><br><br><br>
+
+                    <h1>Průvodce tvorbou e-learningových materiálů <br>na VŠCHT Praha</h1>
+                    <br><br><br><br>
+
+                    <div align="center"><span id="btn_entry"><a href="#/obsah">VSTUPTE</a></span></div>
+                    <br><br>
+
+                    <div align="center"><span id="btn_entry_1"><a href="prirucka.pdf">STÁHNĚTE SI PŘÍRUČKU</a></span></div>
+                </div>
+                <div id="obsah" ng-switch-when='obsah'>
+                    <!-- obsah -->
+                    <h1>Obsah</h1>
+                    <ol>
+                        <li>
+                            <a href="#/l1">
+                                <span>Seznamujeme se s e-learningovým prostředím</span>
+
+                                <p>Přihlašujeme se, editujeme profil, nastavujeme fotografii, měníme heslo, nastavujeme role</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l2">
+                                <span>Editujeme a nastavujeme kurz</span>
+
+                                <p>Hlavní stránka kurzu a editace parametrů kurzu</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l3">
+                                <span>Nahráváme soubory do kurzu</span>
+
+                                <p>Nahráváme obrázky, prezentace (PowerPoint), videa...</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l4">
+                                <span>Pracujeme s textovým editorem</span>
+                                <p>Ovládací tlačítka, import dokumentu z MS Word</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l5">
+                                <span>Přidáváme výukový materiál</span>
+
+                                <p>Přidáváme stránku s výukovým materiálem</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l6">
+                                <span>Informujeme studenty</span>
+
+                                <p>Rozesíláme informace studentům přes modul Novinky</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l7">
+                                <span>Získáváme informace od studentů</span>
+
+                                <p>Používáme modul Anketa pro získání informací od studentů</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l8">
+                                <span>Vzájemně komunikujeme</span>
+
+                                <p>Používáme modul Fórum pro komunikaci mezi studenty navzájem a mezi studenty a tutory</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l9">
+                                <span>Vypisujeme konzultační hodiny a chatujeme</span>
+
+                                <p>Komunikujeme v reálném čase na dálku prostřednictvím modulu Chat</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l10">
+                                <span>Zkoumáme spokojenost studentů s kurzem</span>
+
+                                <p>Používáme modul Průzkum pro získání zpětné vazby od studentů</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l11">
+                                <span>Vytváříme slovník</span>
+
+                                <p>Vytváříme hesla do slovníku, necháváme studenty vytvářet hesla</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l12">
+                                <span>Zadáváme úkoly a známkujeme</span>
+
+                                <p>Zadáváme domácí úkoly, opravujeme výsledky, známkujeme</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l13">
+                                <span>Strukturujeme materiály a vkládáme materiály z internetu</span>
+
+                                <p>Strukturujeme materiály, vkládáme materiály z internetu</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l14">
+                                <span>Testujeme studenty</span>
+
+                                <p>Vytváříme banku testových úloh, (automaticky) testujeme studenty</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/l15">
+                                <span>Dodatek A: Postavení e-learningu na VŠCHT Praha</span>
+
+                                <p>e-learningové kurzy na VŠCHT Praha, pravidla k dodržení pro akreditaci předmětů</p>
+                            </a>
+                        </li>
+                    </ol>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+                <!--
+                  videa/01_uvod_prihlaseni_profil_role
+                  videa/13_1
+                -->
+                <div prirucka-video="videa/01_uvod_prihlaseni_profil_role1" ng-switch-when='l1'>
+                    <!-- obsah -->
+                    <h1>1. <span>Seznamujeme se s e-learningovým prostředím</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>E-learning.vscht.cz</span></li>
+                                        <li><span video-pos='27'>Hlavní obrazovka</span></li>
+                                        <ol>
+                                            <li><span video-pos='41'>Přihlašujeme se v pravé horní části obrazovky</span></li>
+                                            <li><span video-pos='66'>Zobrazujeme seznam kurzů, hledáme kurz</span></li>
+                                            <li><span video-pos='90'>Přepínáme jazyk systému, odhla&shy;šu&shy;jeme se</span></li>
+                                            <li><span video-pos='116'>Další ovládací a informační prvky systému</span></li>
+                                        </ol>
+                                        <li><span video-pos='128'>Editujeme uživatelský profil, ukládáme změny</span></li>
+                                        <li><span video-pos='166'>Využíváme navigaci v horní části</span></li>
+                                        <li><span video-pos='192'>Přehled práv v systému</span></li>
+                                        <ol>
+                                            <li><span video-pos='200'>Administrátor &mdash; vytváří kurzy</span></li>
+                                            <li><span video-pos='214'>Pedagog &mdash; naplňuje kurzy</span></li>
+                                            <li><span video-pos='230'>Student &mdash; nemá práva změn kurzu</span></li>
+                                        </ol>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/02_kurz_editace_nastaveni1" ng-switch-when='l2'>
+                    <!-- obsah -->
+                    <h1>2. <span>Editace a nastavení kurzu</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>Změny v postranním panelu po otevření kurzu</span></li>
+                                        <li><span video-pos='30'>Nabídka nastavení</span></li>
+                                        <li><span video-pos='50'>Osnova kurzu a činnosti</span></li>
+                                        <li><span video-pos='70'>Přepnutí se do editačního módu stránky</span></li>
+                                        <li><span video-pos='100'>Editační tlačítka</span></li>
+                                        <ol>
+                                            <li><span video-pos='107'>Tlačítko upravení názvu</span></li>
+                                            <li><span video-pos='115'>Pohyb v rámci tématu </span></li>
+                                            <li><span video-pos='125'>Přesunutí</span></li>
+                                            <li><span video-pos='130'>Editace</span></li>
+                                            <li><span video-pos='133'>Duplikování</span></li>
+                                            <li><span video-pos='148'>Smazání</span></li>
+                                            <li><span video-pos='151'>Skrytí</span></li>
+                                            <li><span video-pos='155'>Přidělení rolí</span></li>
+                                        </ol>
+                                        <li><span video-pos='155'>Schování nevyužitých panelů</span></li>
+                                        <li><span video-pos='185'>Přepínaní role uživatele</span></li>
+                                        <li><span video-pos='237'>Úprava nastavení kurzu</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/03_soubory_nahravani_osobni1" ng-switch-when='l3'>
+                    <!-- obsah -->
+                    <h1>3. <span>Nahrávání souborů (obrázky, PDF, PowerPoint)</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='20'>Zmenšení postranních panelů</span></li>
+                                        <li><span video-pos='43'>Varianta 1: přidání souborů přetažením</span></li>
+                                        <ol>
+                                            <li><span video-pos='70'>Přesouvání souboru na místo</span></li>
+                                        </ol>
+                                        <li><span video-pos='88'>Varianta 2: přidání přes <b>Přidat činnost</b></span></li>
+                                        <ol>
+                                            <li><span video-pos='103'>Vytvoření osobní složky souborů</span></li>
+                                            <li><span video-pos='130'>Nahrání osobních souborů a jejich strukturování do složek</span></li>
+                                            <li><span video-pos='170'>Zpřístupnění nahraných souborů</span></li>
+                                        </ol>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/04_editor1" ng-switch-when='l4'>
+                    <!-- obsah -->
+                    <h1>4. <span>Práce s textovým editorem</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='30'>Vzhled a velikost editoru</span></li>
+                                        <li><span video-pos='60'>Pruh tlačítek</span></li>
+                                        <ol>
+                                            <li><span video-pos='60'>Tlačítka upravení velikosti a stylu písma</span></li>
+                                            <li><span video-pos='80'>Menu formátování</span></li>
+                                            <li><span video-pos='86'>Vrácení změn</span></li>
+                                            <li><span video-pos='95'>Hledání a náhrada textu</span></li>
+                                            <li><span video-pos='105'>Individuální formátování &mdash; znaku, odstavce</span></li>
+                                            <li><span video-pos='150'>Vkládání textu z MS Wordu</span></li>
+                                            <li><span video-pos='193'>Nastavení barvy a orientace textu</span></li>
+                                            <li><span video-pos='205'>Tvoření seznamů, odsazení</span></li>
+                                            <li><span video-pos='215'>Nedělitelná mezera, speciální symboly</span></li>
+                                            <li><span video-pos='213'>Vkládání obrázku a jeho úprava</span></li>
+                                            <li><span video-pos='297'>Import videa a zvukového souboru</span></li>
+                                            <li><span video-pos='305'>Zápis chemických vzorců</span></li>
+                                        </ol>
+                                        <li><span video-pos='340'>Uložení textu</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div prirucka-video="videa/13_stranka1" ng-switch-when='l5'>
+                    <!-- obsah -->
+                    <h1>5. <span>Vložení stránky (výukového materiálu) do kurzu</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='29'>Přidání stránky</span></li>
+                                        <ol>
+                                            <li><span video-pos='50'>Popis stránky &mdash; co se student může na stránce naučit</span></li>
+                                        </ol>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/05_novinky1" ng-switch-when='l6'>
+                    <!-- obsah -->
+                    <h1>6. <span>Modul Novinky</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='20'>Co je modul Novinky?</span></li>
+                                        <li><span video-pos='70'>Přidání novinky</span></li>
+                                        <ol>
+                                            <li><span video-pos='90'>Formulář přidání novinky</span></li>
+                                            <li><span video-pos='110'>Přidání souboru do novinky</span></li>
+                                            <li><span video-pos='125'>Odeslání zprávy o novince studentům</span></li>
+                                        </ol>
+                                        <li><span video-pos='160'>Panel novinek</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/06_anketa1" ng-switch-when='l7'>
+                    <!-- obsah -->
+                    <h1>7. <span>Modul Anketa</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>Anketa = hlasování studentů</span></li>
+                                        <li><span video-pos='30'>Přidání ankety</span></li>
+                                        <ol>
+                                            <li><span video-pos='30'>Nastavení názvu ankety a odpovědí</span></li>
+                                            <li><span video-pos='130'>Nastavení doby platnosti ankety</span></li>
+                                            <li><span video-pos='150'>Zveřejnění výsledků ankety po hlasování</span></li>
+                                        </ol>
+                                        <li><span video-pos='200'>Hlasování v anketě</span></li>
+                                        <li><span video-pos='240'>Export výsledků</span></li>
+                                        <li><span video-pos='260'>Jak anketu vidí student?</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/07_forum1" ng-switch-when='l8'>
+                    <!-- obsah -->
+                    <h1>8. <span>Modul Fórum</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>Fórum = komunikace mezi účastníky kurzu</span></li>
+                                        <li><span video-pos='60'>Přidání fóra</span></li>
+                                        <ol>
+                                            <li><span video-pos='30'>Nastavení názvu fóra a odpovědí</span></li>
+                                            <li><span video-pos='100'>Nastavení typu fóra</span></li>
+                                            <li><span video-pos='170'>Typ fóra Otázky a odpovědi</span></li>
+                                            <li><span video-pos='190'>Způsob odebírání příspěvků</span></li>
+                                            <li><span video-pos='218'>Omezení počtu příspěvků</span></li>
+                                            <li><span video-pos='230'>Hodnocení aktivity studenta ve fóru</span></li>
+                                        </ol>
+                                        <li><span video-pos='252'>Založení diskuzního tématu</span></li>
+                                        <li><span video-pos='300'>Úprava, odstranění a odpovídání na příspěvek</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/08_chat1" ng-switch-when='l9'>
+                    <!-- obsah -->
+                    <h1>9. <span>Modul Chat</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>Chat = komunikace v reálném čase</span></li>
+                                        <li><span video-pos='30'>Ukázka vytvoření konzultační hodiny</span></li>
+                                        <ol>
+                                            <li><span video-pos='30'>Přidání chatu</span></li>
+                                            <li><span video-pos='60'>Nastavení termínu konzultační hodiny</span></li>
+                                            <li><span video-pos='75'>Ukládání dat chatu</span></li>
+                                        </ol>
+                                        <li><span video-pos='100'>Vstup do chatu</span></li>
+                                        <li><span video-pos='140'>Poslání zprávy do chatu</span></li>
+                                        <li><span video-pos='170'>Prohlížení archivu chatu</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/09_pruzkum1" ng-switch-when='l10'>
+                    <!-- obsah -->
+                    <h1>10. <span>Modul Průzkum</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='40'>Přidání průzkumu</span></li>
+                                        <li><span video-pos='80'>Typy průzkumů</span></li>
+                                        <ol>
+                                            <li><span video-pos='80'>ATTLS &mdash; průzkum postojů, přemýšlení a vzdělávání</span></li>
+                                            <li><span video-pos='100'>Typ důležité okamžiky</span></li>
+                                            <li><span video-pos='120'>Typ COLLES &mdash; zkušenosti studentů s kurzy</span></li>
+                                        </ol>
+                                        <li><span video-pos='160'>Zobrazení otázek průzkumu</span></li>
+                                        <li><span video-pos='170'>Zobrazení výsledků průzkumu</span></li>
+                                        <li><span video-pos='190'>Zobrazení výsledků ve formě grafu</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/10_slovnik1" ng-switch-when='l11'>
+                    <!-- obsah -->
+                    <h1>11. <span>Modul Slovník</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='0'>Přidání terminologického slovníku</span></li>
+                                        <ol>
+                                            <li><span video-pos='50'>Specifikace typu slovníku</span></li>
+                                            <li><span video-pos='70'>Editace slovníku studenty</span></li>
+                                            <li><span video-pos='85'>Možnost tisku slovníku</span></li>
+                                            <li><span video-pos='128'>Hodnocení aktivity studentů v modulu, peer review</span></li>
+                                        </ol>
+                                        <li><span video-pos='160'>Naplnění slovníku hesly</span></li>
+                                        <li><span video-pos='216'>Vyhledávání termínů</span></li>
+                                        <li><span video-pos='230'>Automatické propojování studijního materiálu na slovník</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/11_znamky_ukol1" ng-switch-when='l12'>
+                    <!-- obsah -->
+                    <h1>12. <span>Moduly pro samostatnou práci studentů a známkování</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='20'>Položka známky</span></li>
+                                        <li><span video-pos='40'>Zobrazení celkového hodnocení studentů</span></li>
+                                        <li><span video-pos='85'>Nastavení hodnocení studentů</span></li>
+                                        <li><span video-pos='150'>Přidání úkolu</span></li>
+                                        <ol>
+                                            <li><span video-pos='185'>Nastavení termínu odevzdání</span></li>
+                                        </ol>
+                                        <li><span video-pos='290'>Zjištění, kdo úkol odevzdal a hodnocení práce</span></li>
+                                        <li><span video-pos='370'>Možnosti oprav prací studenty, zamknutí oprav</span></li>
+                                        <li><span video-pos='230'>Automatické propojování studijního materiálu na slovník</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/12_popisek_url1" ng-switch-when='l13'>
+                    <!-- obsah -->
+                    <h1>13. <span>Modul Popisek &mdash; členění kurzu do bloků, modul URL &mdash; vložení materiálu z internetu</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='30'>Vložení popisku</span></li>
+                                        <li><span video-pos='97'>Vložení materiálů z internetu</span></li>
+                                        <li><span video-pos='160'>Vsazení obsahu z internetu do našich materiálů</span></li>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div prirucka-video="videa/14_test1" ng-switch-when='l14'>
+                    <!-- obsah -->
+                    <h1>14. <span>Testování studentů</span></h1>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div id="casttext">
+                                    <ol>
+                                        <li><span video-pos='23'>Vytvoření testu</span></li>
+                                        <li><span video-pos='27'>Tvorba testových otázek &mdash; banka úloh</span></li>
+                                        <ol>
+                                            <li><span video-pos='66'>Strukturování otázek, kategorie otázek</span></li>
+                                            <li><span video-pos='124'>Přidání otázky</span></li>
+                                            <li><span video-pos='152'>Typ otázky &mdash; nakreslení molekuly</span></li>
+                                            <li><span video-pos='165'>Vyplňování otázky</span></li>
+                                            <li><span video-pos='270'>Nastavení počtu pokusů odpovědi na otázku</span></li>
+                                        </ol>
+                                        <li><span video-pos='309'>Přidání testu</span></li>
+                                        <ol>
+                                            <li><span video-pos='340'>Nastavení časového limitu testu</span></li>
+                                            <li><span video-pos='395'>Zabezpečení testu heslem</span></li>
+                                            <li><span video-pos='403'>Nastavení hodnocení testu</span></li>
+                                            <li><span video-pos='424'>Přidání otázky do testu</span></li>
+                                        </ol>
+                                    </ol>
+                                </div>
+                            </td>
+                            <td class="bg_video">
+                                <div class="castvideo">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div ng-switch-when='l15'>
+                    <!-- obsah -->
+                    <h1>Dodatek A: Postavení e-learningu na VŠCHT Praha<span></span></h1>
+                    Tato část bude teprve doplněna.
+                </div>
+
+                <!-- end of standard content -->
+            </div>
+
+            <div id="footer">
+                <div id="footwrap">
+                    <div id="oppa" align="right"><img src="css/graphic/logo_oppa.png"/></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+				

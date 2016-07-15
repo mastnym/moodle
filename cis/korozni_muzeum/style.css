@@ -1,0 +1,166 @@
+/*body {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}*/
+.entrytable, .demo2 {
+    border-collapse:collapse;
+    width: 100%;
+    border-bottom: 3px solid #fff;
+}
+
+.entrytable .roh-levy {
+    background-image: url("img/roh2.png"), url("img/bg.png");
+    background-position: left top, left top;
+    background-repeat: no-repeat, repeat;
+    width: 25%;
+    min-width: 200px;
+    font-size: large;
+    color: white;
+    font-family:sans-serif;
+}
+
+.entrytable .nadpis {
+    background: #b95630 url("img/bg.png") right top repeat;
+    font-size: x-large;
+    color: white;
+    min-width: 500px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family:sans-serif;
+}
+
+.entrytable .roh-pravy {
+    background: #fff url("img/roh1.png") right top no-repeat;
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 10px;
+    font-size: x-large;
+    color: white;
+}
+.entrytable .roh-pravy span {
+    font-size: medium;
+
+}
+
+.entrytable td{
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    word-break:initial;
+}
+.entrytable img{
+    height: 70px;
+}
+.entriesform .entrytable img{
+     height: auto;
+}
+
+.entrytable td.levy {
+   background: #dddbd6;
+   border-bottom: 3px solid #fff;
+   border-right: 3px solid #fff;
+    font-weight: bold;
+}
+.entrytable td.pravy {
+   background: #eeedeb;
+   border-bottom: 3px solid #fff;
+
+}
+
+
+.entrytable .foto-popis, .entrytable .hidden-row{
+     display:none;
+}
+.entriesform .entrytable .foto-popis{
+     display:initial;
+}
+.entriesform .entrytable .hidden-row{
+     display:table-row;
+}
+
+/*Pretizeni important na bunce - word - break */
+.entrytable td{
+ word-break:normal !important;
+}
+.lightbox_desc{
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-radius: 20px;
+}
+
+/*Mutace barev pro jednotlivé kategorie*/
+.Povrchové_úpravy .entrytable .roh-levy {
+    background-image: url("img/roh2pu.png"), url("img/bgpu.png");
+}
+.Povrchové_úpravy .entrytable .nadpis {
+    background: #b95630 url("img/bgpu.png") right top repeat;
+}
+.Povrchové_úpravy .entrytable .roh-pravy {
+    background: #fff url("img/roh1pu.png") right top no-repeat;
+}
+
+.Protikorozní_ochrana .entrytable .roh-levy {
+    background-image: url("img/roh2po.png"), url("img/bgpo.png");
+}
+.Protikorozní_ochrana .entrytable .nadpis {
+    background: #b95630 url("img/bgpo.png") right top repeat;
+}
+.Protikorozní_ochrana .entrytable .roh-pravy {
+    background: #fff url("img/roh1po.png") right top no-repeat;
+}
+
+.Kovové_materiály .entrytable .roh-levy {
+    background-image: url("img/roh2km.png"), url("img/bgkm.png");
+}
+.Kovové_materiály .entrytable .nadpis {
+    background: #b95630 url("img/bgkm.png") right top repeat;
+}
+.Kovové_materiály .entrytable .roh-pravy {
+    background: #fff url("img/roh1km.png") right top no-repeat;
+}
+
+/*main navigation*/
+.km_main_nav {
+    background: #b95630 url("img/bg.png") right top repeat;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color:white;
+    font-family: sans-serif;
+    width:50%;
+}
+
+.Povrchové_úpravy .km_main_nav {
+    background: #b95630 url("img/bgpu.png") right top repeat;
+}
+.Protikorozní_ochrana .km_main_nav {
+    background: #b95630 url("img/bgpo.png") right top repeat;
+}
+
+.Kovové_materiály .km_main_nav {
+    background: #b95630 url("img/bgkm.png") right top repeat;
+}
+.km_main_nav input{
+  margin-bottom:0px;
+}
+.left-mar{
+ margin-left:5px;
+}
+
+
+
+.demo2 td.levy {
+background: #dddbd6;
+border-bottom: 3px solid #fff;
+border-right: 3px solid #fff;
+}
+.demo2 td.pravy {
+background: #eeedeb;
+border-bottom: 3px solid #fff;
+border-right: 3px solid #fff;
+}
+.demo2 td.pravy:last-child {
+border-right: 0;
+}

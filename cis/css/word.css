@@ -1,0 +1,277 @@
+ /* Style Definitions */
+ 
+
+.WordSection1 h2
+	{
+	
+	color:#7F7F7F;}
+.WordSection1 h3
+	{
+	color:#C0504D;}
+.WordSection1 h4
+	{
+	color:gray;
+	font-style:italic;}
+.WordSection1 h5
+	{
+	
+	color:#243F60;
+	}
+.WordSection1 h6
+	{
+	
+	
+	color:#243F60;
+	font-style:italic;}
+	
+	
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{
+	
+	color:#404040;
+	font-style:italic;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{
+	
+	
+	color:#404040;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{
+	color:#404040;
+	font-style:italic;}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	font-size:10.0pt;
+	}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{
+	
+	font-size:20.0pt;
+	
+	color:#17365D;
+	letter-spacing:.25pt;}
+p.MsoTitleCxSpFirst, li.MsoTitleCxSpFirst, div.MsoTitleCxSpFirst
+	{
+	margin:0cm;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0cm;
+	font-size:26.0pt;
+	
+	color:#17365D;
+	letter-spacing:.25pt;}
+p.MsoTitleCxSpMiddle, li.MsoTitleCxSpMiddle, div.MsoTitleCxSpMiddle
+	{
+	margin:0cm;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0cm;
+	font-size:26.0pt;
+	
+	color:#17365D;
+	letter-spacing:.25pt;}
+p.MsoTitleCxSpLast, li.MsoTitleCxSpLast, div.MsoTitleCxSpLast
+	{
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:15.0pt;
+	margin-left:0cm;
+	border:none;
+	padding:0cm;
+	font-size:26.0pt;
+	
+	color:#17365D;
+	letter-spacing:.25pt;}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+	{
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:12.0pt;
+	
+	color:#4F81BD;
+	letter-spacing:.75pt;
+	font-style:italic;}
+span.MsoPlaceholderText
+	{color:gray;}
+
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:11.0pt;
+	}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:11.0pt;
+	}
+p.MsoQuote, li.MsoQuote, div.MsoQuote
+	{
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:11.0pt;
+	
+	color:black;
+	font-style:italic;}
+p.MsoIntenseQuote, li.MsoIntenseQuote, div.MsoIntenseQuote
+	{
+	margin-top:10.0pt;
+	margin-right:46.8pt;
+	margin-bottom:14.0pt;
+	margin-left:46.8pt;
+	line-height:115%;
+	border:none;
+	padding:0cm;
+	font-size:11.0pt;
+	
+	color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+span.MsoSubtleEmphasis
+	{color:gray;
+	font-style:italic;}
+span.MsoIntenseEmphasis
+	{color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+span.MsoSubtleReference
+	{font-variant:small-caps;
+	color:#C0504D;
+	text-decoration:underline;}
+span.MsoIntenseReference
+	{font-variant:small-caps;
+	color:#C0504D;
+	letter-spacing:.25pt;
+	font-weight:bold;
+	text-decoration:underline;}
+span.MsoBookTitle
+	{font-variant:small-caps;
+	letter-spacing:.25pt;
+	font-weight:bold;}
+span.Nadpis1Char
+	{
+	
+	
+	font-weight:bold;}
+span.Nadpis2Char
+	{
+	
+	
+	color:#7F7F7F;
+	font-weight:bold;}
+span.Nadpis3Char
+	{
+	
+	
+	color:#C0504D;
+	font-weight:bold;}
+span.Nadpis4Char
+	{
+	
+	
+	color:gray;
+	font-weight:bold;
+	font-style:italic;}
+span.Nadpis5Char
+	{
+	
+	
+	color:#243F60;}
+span.Nadpis6Char
+	{
+	
+	
+	color:#243F60;
+	font-style:italic;}
+span.Nadpis7Char
+	{
+	
+	
+	color:#404040;
+	font-style:italic;}
+span.Nadpis8Char
+	{
+	
+	
+	color:#404040;}
+span.Nadpis9Char
+	{
+	
+	
+	color:#404040;
+	font-style:italic;}
+
+p.Dleittext, li.Dleittext, div.Dleittext
+	{
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	
+	color:#C0504D;}
+span.DleittextChar
+	{
+	
+	color:#C0504D;}
+span.NzevChar
+	{
+	
+	color:#17365D;
+	letter-spacing:.25pt;}
+span.PodtitulChar
+	{
+	
+	color:#4F81BD;
+	letter-spacing:.75pt;
+	font-style:italic;}
+span.CittChar
+	{
+	
+	color:black;
+	font-style:italic;}
+span.VrazncittChar
+	{
+	
+	color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}

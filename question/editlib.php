@@ -361,7 +361,7 @@ function question_edit_setup($edittab, $baseurl, $requirecmid = false, $unused =
     $pagevars['recurse']    = question_get_display_preference('recurse',    1, PARAM_BOOL, $thispageurl);
     $pagevars['showhidden'] = question_get_display_preference('showhidden', 0, PARAM_BOOL, $thispageurl);
     $pagevars['qbshowtext'] = question_get_display_preference('qbshowtext', 0, PARAM_BOOL, $thispageurl);
-
+    $pagevars['srchtext']   = optional_param('srchtext', "", PARAM_TEXT);
     // Category list page.
     $pagevars['cpage'] = optional_param('cpage', 1, PARAM_INT);
     if ($pagevars['cpage'] != 1){
@@ -499,4 +499,17 @@ function create_new_question_button($categoryid, $params, $caption, $tooltip = '
     }
 }
 
+function create_new_essay_button($categoryid, $params, $caption, $tooltip = '', $disabled = false) {
+    global $CFG, $PAGE, $OUTPUT,$COURSE;
+    require_once "$CFG->dirroot/mod/uach/uach_config.php";
+    if (isset($CFG->uach_subjects[$COURSE->shortname])){
+    static $choiceformprinted = false;
+    $params['category'] = $categoryid;
+    $url = new moodle_url('/question/addquestion.php', $params);
+    ?>
 
+    <input type="button" onClick="document.location='<?php global $CFG; echo $CFG->wwwroot;?>/question/question.php?courseid=<?php echo $params['courseid'];?>&category=<?php echo $categoryid;?>&qtype=essay'" value=" <?php echo get_string('insertquestion','uach');?> " id="uach_button"/>
+    <a href="javascript:hideElements('show')"  style="float:right;" id="uach_link"><?php echo get_string('showmoreoptions','uach');?></a>
+   <?php
+    }
+ }

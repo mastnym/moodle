@@ -1,0 +1,196 @@
+@CHARSET "UTF-8";
+
+@font-face {
+ font-family: 'Museo';
+ src: url([[font:theme|MuseoSans-300.otf]]) format('opentype');
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'Museo';
+ src: url([[font:theme|MuseoSans-300Italic.otf]]) format('opentype');
+ font-weight: normal;
+ font-style: italic;
+}
+
+body {
+ padding-top: 80px;
+ font-family: MuseoSans-300;
+}
+/*/header*/
+.uct-logo {
+ margin-left: 20px;
+ height: 49px;
+ width: 144px;
+}
+
+.uct-logo2 {
+ padding: 13px 20px;
+ height: 49px;
+ /*distortion of english logo*/
+ /*width: 201px;*/
+ display: inline-block;
+}
+
+.logos {
+ float: left;
+}
+
+.navbar-inner {
+ background-color: white;
+ border-bottom: solid red 2px !important;
+ background-image: none;
+}
+
+.FPBT {
+ border-bottom: solid #65b22e 2px !important;
+}
+
+.FTOP {
+ border-bottom: solid #f29100 2px !important;
+}
+
+.FCHI {
+ border-bottom: solid #00aed2 2px !important;
+}
+
+.brand, .brand-uct {
+ display: inline-block;
+}
+
+.usermenu {
+ padding: 15px 0px;
+}
+
+.langmenu {
+ padding: 15px 0px;
+}
+
+ul.nav {
+ float: right !important;
+}
+
+h1, h3 {
+ color: #00aed2;
+}
+
+h1 {
+ /*float:left;*/
+ width: 50%;
+}
+/*content*/
+#page {
+ max-width: none;
+ padding-left: 60px;
+ padding-right: 0px;
+}
+
+#block-region-side-post {
+ border-left: solid 1px #cccccc;
+ border-bottom: solid 1px #cccccc;
+ margin-top: -5px;
+ margin-bottom: -15px;
+}
+
+div.title {
+ border-bottom: 1px solid #ccc;
+ border-top: 1px solid #ccc;
+ background-color: #f2f2f2;
+ color: #666666;
+}
+
+div.content {
+ background-color: white;
+}
+
+div.block {
+ padding: 0px;
+ border: none;
+ border-radius: none;
+}
+
+div.summary {
+ float: none !important;
+ width: 100% !important;
+ margin-left: 20px !important;
+}
+
+a {
+ color: #00aed2;
+}
+
+#block-region-side-post img {
+ filter:
+  url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+ /* Firefox 10+, Firefox on Android */
+ filter: gray; /* IE6-9 */
+ -webkit-filter: grayscale(100%);
+ /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+#block-region-side-post:hover img {
+ filter:
+  url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+ -webkit-filter: grayscale(0%);
+}
+
+/*sideblock*/
+.showhide {
+ width: 180px;
+ display: block;
+ float: right;
+ margin-top: -40px;
+}
+
+aside.hide {
+ display: none;
+}
+
+/*footer*/
+#page-footer {
+ background-color: #333333;
+ color: white;
+ /*min-height: 100px;*/
+}
+
+div.footer-logo {
+ margin-left: 50px;
+ display: block;
+ float: left;
+ width: 33%;
+ text-align: left;
+}
+
+.footer-info {
+ float: left;
+ width: 33%;
+ margin-left: -50px;
+}
+
+img.uct-logo-footer {
+ width: 252px;
+ height: 49px;
+}
+
+.inline-img {
+ display: inline;
+}
+
+.header.questionname {
+ width: 50%;
+}
+
+.questionbankwindow select {
+ width: 220px;
+}
+/**/
+.resourcecontent.resourcegeneral iframe {
+ min-height: 1000px;
+}
+
+div.modified {
+ float: right;
+ font-style: italic;
+ font-size: 80%;
+}

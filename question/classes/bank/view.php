@@ -461,7 +461,7 @@ class view {
      * displayoptions Sets display options
      */
     public function display($tabname, $page, $perpage, $cat,
-            $recurse, $showhidden, $showquestiontext) {
+            $recurse, $showhidden, $showquestiontext, $searchtext) {
         global $PAGE, $OUTPUT;
 
         if ($this->process_actions_needing_ui()) {
@@ -471,6 +471,7 @@ class view {
         // Category selection form.
         echo $OUTPUT->heading(get_string('questionbank', 'question'), 2);
         array_unshift($this->searchconditions, new \core_question\bank\search\hidden_condition(!$showhidden));
+        array_unshift($this->searchconditions, new \core_question\bank\search\searchtext_condition($searchtext));
         array_unshift($this->searchconditions, new \core_question\bank\search\category_condition(
                 $cat, $recurse, $editcontexts, $this->baseurl, $this->course));
         $this->display_options_form($showquestiontext);

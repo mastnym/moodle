@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <element name="settings">
+            <oneOrMore>
+                <element name="course">
+                    <attribute name="name">
+                        <data type="string"/>
+                    </attribute>
+                    <zeroOrMore>
+                        <element name="test">
+                            <attribute name="name">
+                                <data type="string"/>
+                            </attribute>
+                            <oneOrMore>
+                                <element name="XCategory">
+                                    <attribute name="name">
+                                        <data type="string"/>
+                                    </attribute>
+                                    <optional>
+                                        <attribute name="alternativeName">
+                                            <data type="string"/>
+                                        </attribute>
+                                    </optional>
+                                    <oneOrMore>
+                                        <element name="XnCategory">
+                                            <attribute name="name">
+                                                <data type="string"/>
+                                            </attribute>
+                                            <attribute name="questionsInSection">
+                                                <data type="decimal">
+                                                    <param name="minInclusive">1</param>
+                                                    <param name="maxInclusive">10</param>
+                                                </data>
+                                            </attribute>
+                                            <attribute name="spaceAfterQuestion">
+                                                <data type="decimal">
+                                                    <param name="minInclusive">0</param>
+                                                    <param name="maxInclusive">10</param>
+                                                </data>
+                                            </attribute>
+                                            <optional>
+                                                <attribute name="alternativeName">
+                                                    <data type="string"/>
+                                                </attribute>
+                                            </optional>
+                                            <zeroOrMore>
+                                                <element name="percentage">
+                                                    <attribute name="test">
+                                                        <data type="string"/>
+                                                    </attribute>
+                                                    <attribute name="value">
+                                                        <data type="decimal">
+                                                            <param name="minInclusive">0</param>
+                                                            <param name="maxInclusive">100</param>
+                                                        </data>
+                                                    </attribute>
+                                                </element>
+                                            </zeroOrMore>
+                                        </element>
+                                    </oneOrMore>
+                                </element>
+                            </oneOrMore>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </oneOrMore>
+        </element>
+    </start>
+</grammar>

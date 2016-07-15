@@ -1,0 +1,181 @@
+html
+{ background-color: #eeeeee; 
+}
+
+body
+{ color: #666666;
+  font-family: MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Helvetica, Arial;
+  font-size: 14px;
+  line-height: 1.3;
+  height: 100%;
+  margin: 0px;
+}
+
+a:link, a:visited, a:active
+{ color: #da4a38;
+  text-decoration: none;
+}
+
+a:hover
+{ color: #666666;
+}
+
+img
+{ border: 0px;
+}
+
+h1
+{ color: #da4a38;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+h1 span
+{ color: #666666;
+  font-weight: normal;
+  font-size: 25px;
+  padding: 10px;
+}
+
+p
+{ text-align: justify;
+}
+
+ul
+{ /*list-style-type: decimal;*/
+  margin-left: 20px;
+}
+
+ol
+{ margin-left: 20px;
+}
+
+li
+{ color: #da4a38;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+li span
+{ color: #666666;
+  font-size: 20px;
+}
+
+li p
+{ font-size: 14px;
+  padding: 0px 0px;
+  margin: 0px;
+}
+
+
+li:hover
+{ background-color: #f3f3f3;
+  background-color: #dddddd;
+}
+
+.red
+{ color: #da4a38;
+}
+
+.black
+{ color: #666666;
+}
+
+#wrapper
+{ width: 1200px;
+  min-height: 800px;
+  margin: auto;
+  background-image: url("graphic/bg_wrap_wide.png");
+  background-repeat: repeat-y;
+}
+
+#header
+{ padding-top: 50px;
+  margin-left: 65px;
+}
+
+#elearn
+{ float: right;
+  margin-right: 40px;
+}
+
+#content
+{ width: 990px;
+  min-height: 1000px;
+  margin: 0px 20px 0px 65px; 
+  background-image: url("graphic/bg_cont.png");
+  background-repeat: repeat-y;
+  background-color: #ffffff;
+  padding: 5px 40px 20px 90px;
+  text-align: justify;
+}
+
+#footer
+{ background-image: url("graphic/bg_foot.png");
+  background-repeat: repeat-x;
+  bottom: 0;
+  display: block;
+  height: 50px; 
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+#footwrap
+{ width: 1200px;
+  margin: auto;
+}
+
+#oppa
+{ margin-top: -30px;
+  margin-right: 40px;
+}
+
+#btn_entry
+{ background-color: #eeeeee;
+  padding: 8px 20px 5px 20px;
+}
+
+#btn_entry_1
+{ background-color: #eeeeee;
+    padding: 8px 20px 5px 20px;
+}
+
+#casttext
+{ background-color: #f3f3f3;
+  width: 290px;
+  padding: 1px 0px 1px 10px;
+}
+
+#casttext ol
+{ margin-left: -20px;
+}
+
+#casttext li
+{ padding: 0px;
+  font-size: 14px;
+  padding-right: 20px;
+  padding-left: 5px;
+  padding-top: 1px;
+}
+
+#casttext li span
+{ color: #666666;
+  font-size: 14px;
+}
+
+.castvideo
+{ width: 800px;
+  padding: 15px;
+}
+
+.bg_video
+{ background-color: #cccccc;
+}
+
+.highlighted
+{
+    background-color: #cccccc;
+}
+

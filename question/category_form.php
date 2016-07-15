@@ -54,7 +54,7 @@ class question_category_edit_form extends moodleform {
         }
         $mform->addHelpButton('parent', 'parentcategory', 'question');
 
-        $mform->addElement('text', 'name', get_string('name'),'maxlength="254" size="50"');
+        $mform->addElement('text', 'name', get_string('name'),'maxlength="599" size="50"');
         $mform->setDefault('name', '');
         $mform->addRule('name', get_string('categorynamecantbeblank', 'question'), 'required', null, 'client');
         $mform->setType('name', PARAM_TEXT);

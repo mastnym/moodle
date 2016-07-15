@@ -276,6 +276,7 @@ $string['reviewresponse'] = 'Review response';
 $string['save'] = 'Save';
 $string['savechangesandcontinueediting'] = 'Save changes and continue editing';
 $string['saveflags'] = 'Save the state of the flags';
+$string['searchtext'] = 'Filter by name or question text:';
 $string['selectacategory'] = 'Select a category:';
 $string['selectaqtypefordescription'] = 'Select a question type to see its description.';
 $string['selectcategoryabove'] = 'Select a category above';

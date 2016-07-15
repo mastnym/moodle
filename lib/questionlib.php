@@ -1111,6 +1111,8 @@ function question_category_options($contexts, $top = false, $currentcat = 0,
             }
         }
     }
+    $CFG->exportCategories=$categories;
+    $CFG->all_categories=$categories;
     if ($popupform) {
         $popupcats = array();
         foreach ($categoriesarray as $contextstring => $optgroup) {

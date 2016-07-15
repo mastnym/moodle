@@ -180,7 +180,7 @@ abstract class question_edit_form extends question_wizard_form {
         $mform->addElement('text', 'name', get_string('questionname', 'question'),
                 array('size' => 50, 'maxlength' => 255));
         $mform->setType('name', PARAM_TEXT);
-        $mform->addRule('name', null, 'required', null, 'client');
+        $mform->addRule('name', null, 'required', null, 'server');
 
         $mform->addElement('editor', 'questiontext', get_string('questiontext', 'question'),
                 array('rows' => 15), $this->editoroptions);

@@ -273,13 +273,13 @@ class core_course_external extends external_api {
                             $module['availability'] = $cm->availability;
                             $resource=$DB->get_record($cm->modname, array('id'=>$cm->instance), '*', MUST_EXIST);
                             $module['timemodified']=$resource->timemodified;
-                            
+
                             $metadata=$DB->get_record_sql('SELECT metadata FROM {cis_page_metadata} WHERE module_id = ?', array($cm->id));
                             if (!$metadata){
                             	$metadata="{}";
                             }else{$metadata=$metadata->metadata;}
                             $module['metadata']=$metadata;
-                            
+
                         }
 
                         $baseurl = 'webservice/pluginfile.php';
@@ -456,18 +456,10 @@ class core_course_external extends external_api {
                 // For backward-compartibility
                 $courseinfo['numsections'] = $courseformatoptions['numsections'];
             }
-	    
-            $modinfo = get_fast_modinfo($course);
-            $sections = get_all_sections($course->id);
-            $counter=0;
-            foreach ($sections as $key => $section) {
-            	foreach ($modinfo->sections[$section->section] as $module){
-            		$counter+=1;
-            	}
-            }
-            $courseinfo['isempty']=($counter < 1 ? 1 : 0);         
+
+            $courseinfo['isempty']=($courseinfo['numsections'] < 1 ? 1 : 0);
             $courseinfo["url"]=$CFG->wwwroot."/course/view.php?id=$course->id";
-            
+
 
             //some field should be returned only if the user has update permission
             $courseadmin = has_capability('moodle/course:update', $context);

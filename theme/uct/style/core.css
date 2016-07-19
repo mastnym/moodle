@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-
+/*
 @font-face {
  font-family: 'Museo';
  src: url([[font:theme|MuseoSans-300.otf]]) format('opentype');
@@ -12,11 +12,22 @@
  src: url([[font:theme|MuseoSans-300Italic.otf]]) format('opentype');
  font-weight: normal;
  font-style: italic;
+}*/
+
+@font-face {
+    font-family: 'source_sans_proregular';
+    src: url([[font:theme|SourceSansPro-Regular.woff]]) format('woff'),
+         /*url([[font:theme|sourcesanspro-regular-webfont.woff2]]) format('woff2'),
+         url([[font:theme|sourcesanspro-regular-webfont.woff]]) format('woff'),*/
+         url([[font:theme|sourcesanspro-regular-webfont.ttf]]) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 body {
  padding-top: 80px;
- font-family: MuseoSans-300;
+ font-family: source_sans_proregular;
 }
 /*/header*/
 .uct-logo {

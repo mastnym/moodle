@@ -257,51 +257,59 @@ $.each(table.find("td.pravy"),function(){
      }
 });
 //english/czech advanced
-$("table.entrytable td.pravy, table.entrytable td.nadpis,table.entrytable td.roh-pravy").each(function(){
-    var repl_lang = "cs";
-    $(this).find("*").andSelf().contents().filter(function() {
-      return this.nodeType === 3; //Node.TEXT_NODE
-    }).wrap( "<span class='repl'></span>" );
-    $(this).find("span.repl").each(function(){
-        var repl_nodes = []
-        var start_pos = 0;
-        var inner_text = $(this).text();
-        
-        for (var i = 0, len = inner_text.length; i < len; i++) {
-            if (inner_text[i] == "{" && inner_text[i+1]=="{"){
+var entry_table = $("table.entrytable");
+// avoid translation on edit page
+console.log(entry_table.find("input"));
+if (!entry_table.find("input").length){
+    $("table.entrytable td.pravy, table.entrytable td.nadpis,table.entrytable td.roh-pravy").each(function(){
+        var repl_lang = "cs";
+        $(this).find("*").andSelf().contents().filter(function() {
+            return this.nodeType === 3; //Node.TEXT_NODE
+        }).wrap( "<span class='repl'></span>" );
+        $(this).find("span.repl").each(function(){
+            var repl_nodes = []
+            var start_pos = 0;
+            var inner_text = $(this).text();
+            
+            for (var i = 0, len = inner_text.length; i < len; i++) {
+                if (inner_text[i] == "{" && inner_text[i+1]=="{"){
+                    repl_nodes.push($('<span data-lang="'+repl_lang+'">'+ inner_text.substring(start_pos, i) + '</span>'));
+                    start_pos = i+2;
+                    repl_lang = "en";
+                }
+                else if (inner_text[i] == "}" && inner_text[i+1]=="}"){
+                    repl_nodes.push($('<span data-lang="'+repl_lang+'">'+ inner_text.substring(start_pos, i) + '</span>'));
+                    start_pos = i+2;
+                    repl_lang = "cs";
+                }
+            } 
+            
+            //add the rest of string
+            if (start_pos < i){
                 repl_nodes.push($('<span data-lang="'+repl_lang+'">'+ inner_text.substring(start_pos, i) + '</span>'));
-                start_pos = i+2;
-                repl_lang = "en";
             }
-            else if (inner_text[i] == "}" && inner_text[i+1]=="}"){
-                repl_nodes.push($('<span data-lang="'+repl_lang+'">'+ inner_text.substring(start_pos, i) + '</span>'));
-                start_pos = i+2;
-                repl_lang = "cs";
+            //trim all nodes to see if theyre not blank
+            $.grep(repl_nodes, function(v){
+                return v.text().trim().length > 0;
+            });
+            //single node??? remove attribute data-lang
+            if (repl_nodes.length == 1){
+                repl_nodes[0].removeAttr("data-lang");
             }
-        } 
-        
-        //add the rest of string
-        if (start_pos < i){
-            repl_nodes.push($('<span data-lang="'+repl_lang+'">'+ inner_text.substring(start_pos, i) + '</span>'));
-        }
-        //trim all nodes to see if theyre not blank
-        $.grep(repl_nodes, function(v){
-            return v.text().trim().length > 0;
+            $(this).empty();
+            var self = $(this);
+            $.each(repl_nodes, function(i,v){
+                self.append(v);
+            });
+            
         });
-        //single node??? remove attribute data-lang
-        if (repl_nodes.length == 1){
-            repl_nodes[0].removeAttr("data-lang");
-        }
-        $(this).empty();
-        var self = $(this);
-        $.each(repl_nodes, function(i,v){
-            self.append(v);
-        });
-        
     });
-});
+    
+    $( "td.pravy span[data-lang], td.nadpis span[data-lang], td.roh-pravy span[data-lang]").not("[data-lang='"+lang+"']").hide();
+}
 
-$( "td.pravy span[data-lang], td.nadpis span[data-lang], td.roh-pravy span[data-lang]").not("[data-lang='"+lang+"']").hide();
+
+
 
 //larger images
 table.find(".pravy img:not(.entriesform .pravy img)").click(function(){

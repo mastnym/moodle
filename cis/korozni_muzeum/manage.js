@@ -308,7 +308,19 @@ if (!entry_table.find("input").length){
     $( "td.pravy span[data-lang], td.nadpis span[data-lang], td.roh-pravy span[data-lang]").not("[data-lang='"+lang+"']").hide();
 }
 
-
+//translate categories + name
+var category_names = {"Korozní muzeum":"Museum of corrosion",
+                      "Povrchové úpravy":"Corrosion protection",
+                      "Protikorozní ochrana":"Surface treatment",
+                      "Druhy koroze":"Corrosion types",
+                      "Kovové materiály":"Metal materials"}
+if (lang == 'en'){
+    for(var czname in category_names ){
+        console.log(czname);
+        var re = new RegExp(czname,"g");
+        document.body.innerHTML = document.body.innerHTML.replace(re, category_names[czname]);
+    }
+}
 
 
 //larger images

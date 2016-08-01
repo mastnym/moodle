@@ -314,11 +314,17 @@ var category_names = {"Korozní muzeum":"Museum of corrosion",
                       "Protikorozní ochrana":"Surface treatment",
                       "Druhy koroze":"Corrosion types",
                       "Kovové materiály":"Metal materials"}
+
+var content_changes = {"Kategorie":"Category", "Vyhledávání":"Search"}
+
 if (lang == 'en'){
     for(var czname in category_names ){
-        console.log(czname);
         var re = new RegExp(czname,"g");
         document.body.innerHTML = document.body.innerHTML.replace(re, category_names[czname]);
+    }
+    for(var czname in content_changes ){
+        var re = new RegExp(czname,"g");
+        document.getElementById("region-main").innerHTML = document.getElementById("region-main").innerHTML.replace(re, content_changes[czname]);
     }
 }
 

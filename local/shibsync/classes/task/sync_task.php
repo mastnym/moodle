@@ -44,14 +44,8 @@ class sync_task extends \core\task\scheduled_task {
      */
     public function execute() {
         global $CFG;
-        $path = "{$CFG->dirroot}/local/shibsync/classes/sync_plugin.php";
-        echo $path;
-        require_once($path);
-
+        require_once("{$CFG->dirroot}/local/shibsync/classes/sync_plugin.php");
         $auth = new \local_shibsync_sync_plugin();
-        echo "running";
-        return;
-
         $auth->sync_users(true);
     }
 

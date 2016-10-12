@@ -9,11 +9,11 @@ class generalQtype{
 		$this->category=$category;
 		$this->count=$count;
 		$this->generator = $generator;
-		
+
 		$this->findChemicalFormulas();
 		$this->saveImages();
 		$this->failed=false;
-		
+
 	}
 	function findChemicalFormulas(){
 		$text=$this->question->questiontext;
@@ -27,7 +27,7 @@ class generalQtype{
 		while ($wordToken->type !=WordToken::END){
 			if ($wordToken -> type == WordToken::FORMULA){
 				try{
-					$chemTok = new ChemicalTokenizer($wordToken -> value);
+					$chemTok = new ChemicalTokenizer(trim($wordToken -> value));
 					$parser= new Parser($chemTok);
 					$result =$parser->parse();
 					$html=$this->createHtmlFromTokens($result);
@@ -79,7 +79,7 @@ class generalQtype{
 			if ($token->italic){
 				$val="<em>".$val."</em>";
 			}
-				
+
 			if ($token->pos == MoleculePart::SUB && $nextToken && $nextToken->pos == MoleculePart::SUP){
 				$spacing=strlen($token->value)*5;//magic
 				$html.="<sub><span style='position:relative;top:2.0pt;mso-text-raise:-2.0pt;letter-spacing:-".$spacing.".0pt'>".$token->value."</span></sub>";
@@ -130,7 +130,7 @@ class generalQtype{
 					if ($file->get_filename()==urldecode($filename)){
 						$newsrc= "test_files".DIRECTORY_SEPARATOR.$file->get_filename();
 						$node->setAttribute("src",$newsrc);
-							
+
 						file_put_contents($savedir.DIRECTORY_SEPARATOR.$filename, $file->get_content());
 						break;
 					}
@@ -149,17 +149,17 @@ class generalQtype{
 	function getText(){
 		return $this->question->questiontext;
 	}
-	
+
 	function getPoints(){
 		if ($this->category->points!=0){
 			return $points=$this->category->points;
 		}
 		return $points=$this->question->defaultmark;
 	}
-	
+
 	function format_points(){
 		if (!$this->generator->question_points){
-			return "&nbsp;";			
+			return "&nbsp;";
 		}
 		$points = $this->getPoints();
 		if ($points==0){
@@ -189,14 +189,14 @@ class generalQtype{
 		}
 		$html.=$this->generateAnswerRow();
 		$html.="</tr></table>";
-		
+
 		return $html;
 	}
-	
+
 	function generateAnswerRow(){
 		return "";
 	}
-	
+
 	function createSpaces(){
 		$i=$this->category->spaces;
 		$html="";
@@ -209,10 +209,10 @@ class generalQtype{
 		}
 		return $html;
 	}
-	
+
 	function generateMetadata(){
 		$points = round($this->getPoints());
-		
+
 		$metadata=array();
 		$metadata["id"]=intval($this->question->id);
 		$metadata["qt"]=$this->question->qtype;
@@ -240,13 +240,13 @@ class generalQtype{
 			$answer_details["fr"]=round(10/(float)$points,2);
 			$metadata["ans"][]=$answer_details;
 			$id++;
-		}	
+		}
 		$this->generator->metadata[]=$metadata;
 	}
-	
+
 	function generateCheckboxesForSemiAutomaticCorrection(){
 		if ($this->getPoints()>10){
-			
+
 			$table = "<div align=center>
 							<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
 							 style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
@@ -419,7 +419,7 @@ class generalQtype{
 							</div>" ;
 					}
 			return $table;
-	
+
 	}
 
 }
@@ -466,7 +466,7 @@ class multichoiceQtype extends generalQtype{
 	function getText(){
 		return $this->question->questiontext;
 	}
-	
+
 	function generateMetadata(){
 		$metadata=array();
 		$metadata["id"]=intval($this->question->id);
@@ -481,11 +481,11 @@ class multichoiceQtype extends generalQtype{
 		}
 		$this->generator->metadata[]=$metadata;
 	}
-	
+
 	function generateCheckboxesForSemiAutomaticCorrection(){
 		//checkboxes next to each question
 		return "";
-		
+
 	}
 	function generateAnswerRow(){
 		$html="<tr>";
@@ -493,36 +493,36 @@ class multichoiceQtype extends generalQtype{
 			$html.="<td><p class=no_page_break>&nbsp;</p></td>";
 		}
 		$html.="<td><table class=answerTable>";
-		
+
 		foreach ($this->question->options->answers as $answer){
 			$html.="<tr>";
 			$html.="<td class=answer><div class=answer>".$this->parseChemFormula($answer->answer)."</div></td>";
-			
+
 			//crossed square
 			if ($this->generator->results && intval($answer->fraction)>0){
 				$html.="<td class=answer_box><p class=answer_box><span class=square>S</span></p></td>";
 			}//square
 			else{
 				$html.="<td class=answer_box><p class=answer_box><span class=square>*</span>";
-				
+
 				if ($this->generator->cvVersion){
 					$html.="<span class=star>*</span>";
 				}
 				$html.="</p>
 				</td>";
 			}
-		$html.="</tr>";		
+		$html.="</tr>";
 		}
 		$html.="</table></td>";
-				
+
 		if ($this->generator->question_points){
 			$html.="<td><p class=no_page_break>&nbsp;</p></td>";
 		}
-		
+
 		$html.="</tr>";
 		return $html;
 	}
-	
+
 }
 
 

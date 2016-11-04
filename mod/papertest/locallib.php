@@ -200,7 +200,7 @@ class DocGenerator{
 		$path=dirname(__FILE__);
 		//generating test
 		if (!$this->all){
-			$template = $path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR.$COURSE->shortname.".htm";
+			$template = $path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR.$COURSE->idnumber.".htm";
 			if (!file_exists($template)){
 				$template=$path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."default".DIRECTORY_SEPARATOR."test.htm";
 			}

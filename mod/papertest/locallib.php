@@ -209,7 +209,14 @@ class DocGenerator{
 
 			//insert generated html into template
 			$name=$this->getCategoryName($this->selected);
-			$html=str_replace(array("{{TEST_NAME}}","{{TEST_NUM}}","{{code}}","{{content}}"), array($name,$this->variant,getUniqueCode(),$html), $template_content);
+			$month = intval(date("m"));
+			$year = intval(date("Y"));
+			if ($month < 9){
+			     $year -= 1;
+			}
+			$year = strval($year) . "/" . strval(($year+1));
+			$html=str_replace(array("{{TEST_NAME}}","{{TEST_NUM}}","{{code}}","{{content}}","{{year}}"),
+			         array($name,$this->variant,getUniqueCode(),$html), $template_content, $year);
 
 		}
 		//export all - category

@@ -211,12 +211,15 @@ class DocGenerator{
 			$name=$this->getCategoryName($this->selected);
 			$month = intval(date("m"));
 			$year = intval(date("Y"));
+			var_dump($month);
+			var_dump($year);
 			if ($month < 9){
 			     $year -= 1;
 			}
 			$year = strval($year) . "/" . strval(($year+1));
+			var_dump($year);
 			$html=str_replace(array("{{TEST_NAME}}","{{TEST_NUM}}","{{code}}","{{content}}","{{year}}"),
-			         array($name,$this->variant,getUniqueCode(),$html), $template_content, $year);
+			         array($name,$this->variant,getUniqueCode(),$html, $year), $template_content);
 
 		}
 		//export all - category

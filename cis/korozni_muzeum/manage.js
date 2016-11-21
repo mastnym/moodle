@@ -19,12 +19,12 @@
 
 (function($) {
 
-    $.fn.lightbox_me = function(options) {
+    $.fn.lightbox_me_corrosion = function(options) {
 
         return this.each(function() {
 
             var
-                opts = $.extend({}, $.fn.lightbox_me.defaults, options),
+                opts = $.extend({}, $.fn.lightbox_me_corrosion.defaults, options),
                 $overlay = $(),
                 $desc = $(this).nextUntil("img","span.foto-popis");
                 $self = $(this).clone(false).wrap("div"),
@@ -100,7 +100,7 @@
                      .resize(setSelfPosition)
                      .scroll(setSelfPosition);
 
-            $(window).bind('keyup.lightbox_me', observeKeyPress);
+            $(window).bind('keyup.lightbox_me_corrosion', observeKeyPress);
 
             if (opts.closeClick) {
                 $overlay.click(function(e) { closeLightbox(); e.preventDefault; });
@@ -147,7 +147,7 @@
                 $(window).unbind('resize', setOverlayHeight);
                 $(window).unbind('resize', setSelfPosition);
                 $(window).unbind('scroll', setSelfPosition);
-                $(window).unbind('keyup.lightbox_me');
+                $(window).unbind('keyup.lightbox_me_corrosion');
                 opts.onClose();
             }
 
@@ -213,7 +213,7 @@
 
     };
 
-    $.fn.lightbox_me.defaults = {
+    $.fn.lightbox_me_corrosion.defaults = {
 
         // animation
         appearEffect: "fadeIn",
@@ -330,7 +330,7 @@ $(document).ready(function(){
     }
 
     $('body').find(".pravy img:not(.entriesform .pravy img)").click(function(){
-        $(this).lightbox_me();
+        $(this).lightbox_me_corrosion();
     });
 
 

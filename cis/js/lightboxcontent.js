@@ -1,4 +1,4 @@
-var course_ids = [59, 104, 109, 110];
+var course_ids = [59];
 var selector = "body.course-{{course_id}} div[role=main] img"
 var selectors = [];
 $.each(course_ids, function(index, value){

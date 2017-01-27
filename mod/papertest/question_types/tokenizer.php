@@ -122,7 +122,7 @@ class ChemicalTokenizer{
 				$beginIndex=$this->it->key();
 				//+/-
 				if (in_array($c, array("v","i"," ",">","&",CharacterIterator::DONE))){
-					return new ChemToken(ChemToken::SIGN, $cur == "+" ? "+" : "–");
+					return new ChemToken(ChemToken::SIGN, $cur == "+" ? "+" : "−");
 				}//complicated compounds
 				else{
 					while(strlen($el)<self::$MAX_ELEMENTS_LENGTH+1){

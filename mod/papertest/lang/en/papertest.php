@@ -66,7 +66,7 @@ $string['generate'] = 'Generate';
 $string['editsettings'] = 'Edit settings';
 $string['warning'] = 'There was an error in formating chemical substances (test {$a}), it\'s marked by red color';
 $string['ziperror'] = 'Can\'t create zip file';
-
+$string['shuffle'] = 'Shuffle questions in categories';
 //settings
 $string['settings'] = 'Settings';
 $string['addsettings'] = 'Additional test settings';

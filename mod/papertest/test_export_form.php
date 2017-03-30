@@ -26,6 +26,9 @@ class test_export_form extends moodleform {
        	$mform->addElement('checkbox', 'showAnswers', get_string('showanswers', 'papertest'));
        	
        	$mform->addElement('checkbox', 'all', get_string('all', 'papertest'));
+        
+        $mform->addElement('checkbox', 'shuffle', get_string('shuffle', 'papertest'));
+        $mform->setDefault('shuffle',true);
        	
        	$mform->addElement('hidden', 'openCvVersion', 0);
        	$mform->setType('openCvVersion',PARAM_INT);

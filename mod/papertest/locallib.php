@@ -85,11 +85,11 @@ function getQuestionCategoryById($id,$categories){
 }
 
 
-function getQuestionsToCategories(&$categories,$all){
+function getQuestionsToCategories(&$categories,$all, $shuffle){
 	//get questions to each category
 	if (!$all){
 		foreach($categories as $cat){
-				getQuestionsInCategory($cat, false);
+				getQuestionsInCategory($cat, false, $shuffle);
 		}
 	}
 	//export only one category-but all questions
@@ -97,18 +97,20 @@ function getQuestionsToCategories(&$categories,$all){
 	else{
 		foreach($categories as $cat){
 			if ($cat->selected){
-				getQuestionsInCategory($cat, true);
+				getQuestionsInCategory($cat, true, $shuffle);
 			}
 		}
 	}
 }
 
-function getQuestionsInCategory(&$cat,$all){
+function getQuestionsInCategory(&$cat,$all,$shuffle){
 	global $DB;
 	if (!$all){
 		$q=$DB->get_records("question", array("category"=>$cat->id,"parent"=>0),'','id');
 		if ($q){
-			shuffle($q);
+                        if ($shuffle){
+                            shuffle($q);
+                        }
 			if ($cat->count > count($q)){
 				$cat->count = count($q);
 			}
@@ -118,7 +120,9 @@ function getQuestionsInCategory(&$cat,$all){
 				array_push($ids, $object_with_id->id);
 			}
 			$cat->questions=$DB->get_records_list("question", 'id', $ids);
-			shuffle($cat->questions);
+                        if ($shuffle){
+                            shuffle($cat->questions);
+                        }			
 		}else{
 			$cat->questions = array();
 		}
@@ -128,7 +132,9 @@ function getQuestionsInCategory(&$cat,$all){
 		$cat->questions=array();
 		if ($q){
 			$cat->questions = $q;
-			shuffle($cat->questions);
+                        if ($shuffle){
+                            shuffle($cat->questions); 
+                        }
 		}
 	}
 	foreach ($cat->questions as $question){

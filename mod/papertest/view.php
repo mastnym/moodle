@@ -94,6 +94,7 @@ if (($from_form= $export_form->get_data())) {
 	$question_numbers = isset($from_form -> show_numbers);
 	$results = isset($from_form -> showAnswers);
 	$all = isset($from_form->all);
+        $shuffle = isset($from_form->shuffle);
 	$cvVersion=$from_form->openCvVersion;
 	if ($all){
 		$copies=1;
@@ -112,7 +113,7 @@ if (($from_form= $export_form->get_data())) {
 	
 	$generatedFiles=array();
 	for ($i = 0; $i < $copies; $i++) {
-		getQuestionsToCategories($categories,$all);
+		getQuestionsToCategories($categories,$all, $shuffle);
 
 		$doc = new DocGenerator( $categories);
 		$doc -> question_points = $question_points;

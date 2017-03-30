@@ -66,6 +66,7 @@ $string['generate'] = 'Generovat';
 $string['editsettings'] = 'Upravit nastavení';
 $string['warning'] = 'V chemických vzorcích v testu se vyskytla chyba (test {$a}), je označena červenou barvou, prosím zkontrolujte správnost testu';
 $string['ziperror'] = 'Nemohu vytvořit zip';
+$string['shuffle'] = 'Zamíchat otázky v jednotlivých kategoriích';
 
 //settings
 $string['settings'] = 'Nastavení';

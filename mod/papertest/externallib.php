@@ -108,7 +108,7 @@ class mod_papertest_external extends external_api{
 				mkdir($temp);
 		}
 		$all=false;
-		getQuestionsToCategories($categories,$all);
+		getQuestionsToCategories($categories,$all,true);
 	
 		$doc = new DocGenerator( $categories);
 		$doc -> question_points = 0;

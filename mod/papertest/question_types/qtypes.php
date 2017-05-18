@@ -462,7 +462,9 @@ class multichoiceQtype extends generalQtype{
 
 	public function __construct($question,$category,$count,$generator){
 		parent::__construct($question,$category,$count,$generator);
-		shuffle($this->question->options->answers);
+                if (!$generator->results){
+                    shuffle($this->question->options->answers);
+                }	
 	}
 	function getText(){
 		return $this->question->questiontext;

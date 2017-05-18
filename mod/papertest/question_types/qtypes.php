@@ -114,7 +114,8 @@ class generalQtype{
 			$src=$node->getAttribute("src");
 			//base64
 			if (startsWith($src, "data:image/")){
-				$imagedata=end(explode(",",$src));
+				$exp=explode(",",$src);
+                                $imagedata = end($exp);
 				$imagefile=tempnam($savedir, "img");
 				file_put_contents($imagefile, base64_decode($imagedata));
 

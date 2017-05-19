@@ -212,8 +212,13 @@ class DocGenerator{
 			}
 			$template_content=file_get_contents($template);
 			$html=$this->generateCategory($this->selected, $this->categories,true,false);
-
-			//insert generated html into template
+                        //css
+                        $css = file_get_contents($path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."css".DIRECTORY_SEPARATOR."default.css");
+                        $custom_css_path = $path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."css".DIRECTORY_SEPARATOR.$COURSE->idnumber.".css";
+                        if (file_exists($custom_css_path)){
+                            $css .= file_get_contents($custom_css_path); 
+                        }
+                        //insert generated html into template
 			$name=$this->getCategoryName($this->selected);
 			$month = intval(date("m"));
 			$year = intval(date("Y"));
@@ -221,8 +226,8 @@ class DocGenerator{
 			     $year -= 1;
 			}
 			$year = strval($year) . "/" . strval(($year+1));
-			$html=str_replace(array("{{TEST_NAME}}","{{TEST_NUM}}","{{code}}","{{content}}","{{year}}"),
-			         array($name,$this->variant,getUniqueCode(),$html, $year), $template_content);
+                        $html=str_replace(array("{{TEST_NAME}}","{{TEST_NUM}}","{{code}}","{{content}}","{{year}}","{{CSS}}"),
+			         array($name,$this->variant,getUniqueCode(),$html, $year, $css), $template_content);
 
 		}
 		//export all - category

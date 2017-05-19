@@ -277,7 +277,7 @@ class DocGenerator{
 	}
 
 	private function generateQuestions($category){
-		$html="<table class=questionTable>";
+		$html="<table class=\"questionTable\">";
 		$order=0;
 		if ($this->question_numbers){
 			$order=1;//numbering questions within category, if 0 ->no numbers

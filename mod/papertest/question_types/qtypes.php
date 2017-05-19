@@ -180,7 +180,7 @@ class generalQtype{
 	}
 
 	function exportQuestion(){
-		$html = "<tr>";
+		$html = "<tr class=\"question_row\">";
 		if ($this->generator->question_numbers){
 			$html.="<td class=\"question_num\" width=\"3%\"><p class=\"question_num\">".$this->getCount().".&nbsp;</p></td>";
 		}

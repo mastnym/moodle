@@ -272,7 +272,7 @@ class DocGenerator{
 	}
 
 	private function generateQuestions($category){
-		$html="";
+		$html="<table class=questionTable>";
 		$order=0;
 		if ($this->question_numbers){
 			$order=1;//numbering questions within category, if 0 ->no numbers
@@ -293,8 +293,6 @@ class DocGenerator{
 			$html.=$class->exportQuestion();
 
 
-			$html.=$class -> createSpaces();
-
 			if ($this->cvVersion){
 				$html.=$class->generateCheckboxesForSemiAutomaticCorrection();
 			}
@@ -307,7 +305,7 @@ class DocGenerator{
 				$order++;
 			}
 		}
-		return $html;
+		return $html . "</table>";
 
 	}
 

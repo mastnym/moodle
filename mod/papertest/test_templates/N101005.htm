@@ -26,6 +26,9 @@
 @font-face
 	{font-family:Tahoma;
 	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ body{
+    font-family:"Calibri","sans-serif";
+}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{margin-top:0cm;
@@ -39,25 +42,22 @@ h1
 	margin-right:0cm;
 	margin-bottom:0cm;
 	margin-left:0cm;
-	margin-bottom:.0001pt;
 	page-break-after:avoid;
 	font-size:14.0pt;
 	font-family:"Cambria","serif";}
 h2
 	{margin-top:10.0pt;
 	margin-right:0cm;
-	margin-bottom:0cm;
+	margin-bottom:12.0pt;
 	margin-left:0cm;
-	margin-bottom:.0001pt;
 	page-break-after:avoid;
 	font-size:13.0pt;
 	font-family:"Cambria","serif";}
 h3
-	{margin-top:10.0pt;
+	{margin-top:5.0pt;
 	margin-right:0cm;
-	margin-bottom:0cm;
+	margin-bottom:15.0pt;
 	margin-left:0cm;
-	margin-bottom:.0001pt;
 	page-break-after:avoid;
 	font-size:11.0pt;
 	font-family:"Cambria","serif";}
@@ -66,7 +66,6 @@ h4
 	margin-right:0cm;
 	margin-bottom:0cm;
 	margin-left:0cm;
-	margin-bottom:.0001pt;
 	page-break-after:avoid;
 	font-size:11.0pt;
 	font-family:"Cambria","serif";
@@ -168,7 +167,7 @@ ul
 	margin-right:0cm;
 	margin-bottom:10.0pt;
 	margin-left:0cm;
-	page-break-after:avoid;
+	/*page-break-after:avoid;*/
 	mso-pagination:widow-orphan;
 	font-size:11.0pt;
 	font-family:"Calibri","sans-serif";
@@ -208,28 +207,15 @@ ul
 	mso-fareast-theme-font:minor-latin;
 	mso-hansi-font-family:Calibri;
 	mso-hansi-theme-font:minor-latin;
-	mso-bidi-font-family:"Times New Roman";
 	mso-bidi-theme-font:minor-bidi;
 	mso-fareast-language:EN-US;}
-
-td.answer{
-  vertical-align:middle;
-  border:none;
-  border-bottom:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;
-  width: 90%;
-         }  
-         
-         
-p.answer_box{
-  page-break-after:avoid;
-            }
-td.answer_box{
-  width: 10%;
-             } 
-table.answerTable{
-	width:100%;
-}           
+ 
+        td.answer_box, td.answer_a{
+            border-bottom: dotted 1px black; 
+        }
+        td.answer_box{
+            align: right;
+        }
 span.star{
   font-size:10.0pt;
   color:#FAFAFA;
@@ -249,8 +235,7 @@ table.questionTable{
 	mso-style-link:"questionTable Char";
   border:0;
   width:515.7pt;
-  border-collapse:collapse;
-    
+  border-collapse:collapse;  
 }
 
 p.question_num
@@ -264,9 +249,8 @@ p.question_num
 	margin-left:0cm;
 	mso-pagination:widow-orphan;
 	font-size:11.0pt;
-  font-weight:bold;
-	page-break-after:avoid;
-  font-family:"Calibri","sans-serif";
+        font-weight:bold;
+        font-family:"Calibri","sans-serif";
 	mso-bidi-font-size:11.0pt;
 	mso-ascii-font-family:Calibri;
 	mso-ascii-theme-font:minor-latin;
@@ -280,6 +264,7 @@ p.question_num
 
 td.question_num{
   vertical-align:top;
+  
 }
 
 p.question_points
@@ -293,9 +278,8 @@ p.question_points
 	margin-left:0cm;
 	mso-pagination:widow-orphan;
 	font-size:11.0pt;
-  font-style: italic;
-	page-break-after:avoid;
-  font-family:"Calibri","sans-serif";
+        font-style: italic;
+        font-family:"Calibri","sans-serif";
 	mso-bidi-font-size:11.0pt;
 	mso-ascii-font-family:Calibri;
 	mso-ascii-theme-font:minor-latin;

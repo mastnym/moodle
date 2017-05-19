@@ -180,16 +180,17 @@ class generalQtype{
 	}
 
 	function exportQuestion(){
-		$html = "<table class=questionTable><tr>";
+		$html = "<tr>";
 		if ($this->generator->question_numbers){
-			$html.="<td class=question_num><p class=question_num>".$this->getCount().".&nbsp;</p></td>";
+			$html.="<td class=\"question_num\" width=\"3%\"><p class=\"question_num\">".$this->getCount().".&nbsp;</p></td>";
 		}
-		$html.="<td class=question><div class=question>".$this->getText()."</div></td>";
+                $spaces = $this->createSpaces();
+		$html.="<td class=question width=\"92%\" colspan=\"2\"><div class=question>".$this->getText()."</div>$spaces</td>";
 		if ($this->generator->question_points){
-			$html.="<td class=question_points><p class=question_points>".$this->format_points()."</p></td>";
+			$html.="<td class=question_points width=\"5%\"><p class=question_points>".$this->format_points()."</p></td>";
 		}
-		$html.=$this->generateAnswerRow();
-		$html.="</tr></table>";
+		$html.="</tr>";
+                $html.=$this->generateAnswerRow();
 
 		return $html;
 	}
@@ -201,9 +202,6 @@ class generalQtype{
 	function createSpaces(){
 		$i=$this->category->spaces;
 		$html="";
-		if ($i==0){
-			$i=1;//space needed to page break
-		}
 		while ($i>0){
 			$html.=$this->addBlankRow();
 			$i--;
@@ -491,39 +489,35 @@ class multichoiceQtype extends generalQtype{
 
 	}
 	function generateAnswerRow(){
-		$html="<tr>";
-		if ($this->generator->question_numbers){
-			$html.="<td><p class=no_page_break>&nbsp;</p></td>";
-		}
-		$html.="<td><table class=answerTable>";
+            $html = "";    
+            foreach ($this->question->options->answers as $answer){
+                $html.="<tr>";
+                if ($this->generator->question_numbers){
+                        $html.="<td width=\"3%\"><p>&nbsp;</p></td>";
+                }
+                $html.="<td class=\"answer_a\" width=\"82%\">";
+                $html.=$this->parseChemFormula($answer->answer);
+                $html.="</td>";
+                //crossed square
+                if ($this->generator->results && intval($answer->fraction)>0){
+                        $html.="<td class=answer_box align=right width=\"10%\"><p class=answer_box><span class=square>S</span></p></td>";
+                }//square
+                else{
+                    $html.="<td class=answer_box align=right width=\"10%\"><p class=answer_box><span class=square>*</span>";
 
-		foreach ($this->question->options->answers as $answer){
-			$html.="<tr>";
-			$html.="<td class=answer><div class=answer>".$this->parseChemFormula($answer->answer)."</div></td>";
-
-			//crossed square
-			if ($this->generator->results && intval($answer->fraction)>0){
-				$html.="<td class=answer_box><p class=answer_box><span class=square>S</span></p></td>";
-			}//square
-			else{
-				$html.="<td class=answer_box><p class=answer_box><span class=square>*</span>";
-
-				if ($this->generator->cvVersion){
-					$html.="<span class=star>*</span>";
-				}
-				$html.="</p>
-				</td>";
-			}
-		$html.="</tr>";
-		}
-		$html.="</table></td>";
-
-		if ($this->generator->question_points){
-			$html.="<td><p class=no_page_break>&nbsp;</p></td>";
-		}
-
-		$html.="</tr>";
-		return $html;
+                    if ($this->generator->cvVersion){
+                            $html.="<span class=star>*</span>";
+                    }
+                    $html.="</p>
+                    </td>";
+                }
+                
+                if ($this->generator->question_points){
+                        $html.="<td width=\"5%\"><p>&nbsp;</p></td>";
+                }
+                $html.="</tr>";
+                }
+            return $html;
 	}
 
 }

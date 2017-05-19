@@ -96,7 +96,10 @@ if (($from_form= $export_form->get_data())) {
 	$all = isset($from_form->all);
         $shuffle = isset($from_form->shuffle);
 	$cvVersion=$from_form->openCvVersion;
-	if ($all){
+        if ($cvVersion) {
+            $shuffle = true;
+        }
+        if ($all){
 		$copies=1;
 	}
 	//search for all others from same course

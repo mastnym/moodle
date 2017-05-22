@@ -245,7 +245,7 @@ class DocGenerator{
 	}
 
 	private function generateCategory($category,&$categories,$recursive,$generate_header){
-		$html="";
+		$html="<div class=\"catdiv cat_".$category->id."\">";
 		//display only categories you want, except bulk export
 		if (!$recursive && !$category->display){
 			return $html;
@@ -273,6 +273,7 @@ class DocGenerator{
 				$html.=$this->generateCategory($child,$categories,$recursive,true);
 			}
 		}
+                $html .= "<br class=\"beforeend\"/></div>";
 		return $html;
 	}
 

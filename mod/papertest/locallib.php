@@ -316,6 +316,7 @@ class DocGenerator{
 
 
 	function createMHTML(){
+                global $CFG,$COURSE;
 		$exp = new mime10class();
 		$testdir=$this->tmpdir.DIRECTORY_SEPARATOR;
 		$doc=$testdir."test.htm";
@@ -333,8 +334,12 @@ class DocGenerator{
 		}
 		//add header file
 		$path=dirname(__FILE__);
-		copy($path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."headerfooter".DIRECTORY_SEPARATOR."header.htm",
-				$files_folder.DIRECTORY_SEPARATOR."header.htm");
+                $header_path = $path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."headerfooter".DIRECTORY_SEPARATOR."header.htm";
+                $custom_header_path = $path.DIRECTORY_SEPARATOR."test_templates".DIRECTORY_SEPARATOR."headerfooter".DIRECTORY_SEPARATOR.$COURSE->idnumber.".htm";
+                if (file_exists($custom_header_path)){
+                    $header_path = $custom_header_path;
+                }
+                copy($header_path, $files_folder.DIRECTORY_SEPARATOR."header.htm");
 		$files = new DirectoryIterator($files_folder);
 		foreach ($files as $fileinfo) {
 			if (!$fileinfo->isDot()) {

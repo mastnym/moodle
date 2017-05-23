@@ -1,7 +1,6 @@
-body{
+/*body{
     font-family:"Times New Roman","serif";
 }
- /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{
 	margin-bottom:10.0pt;
@@ -53,36 +52,32 @@ h6
 	margin:36.0pt 36.0pt 36.0pt 36.0pt;
 	mso-header: url("test_files/header.htm") h1;
   	mso-footer:url("test_files/header.htm") f1;
-	/*marginy footer + header, musi byt v header.htm*/
+	
 	mso-footer-margin:2.0cm;
 	mso-header-margin:1.25cm;
 	}
 	
 div.WordSection1
 	{page:WordSection1;}
- /* List Definitions */
+
  ol
 	{margin-bottom:0cm;}
 ul
 	{margin-bottom:0cm;}
 
-  /* question */
+
  p.question, li.question, div.question
 	{mso-style-name:question;
 	mso-style-unhide:no;
 	mso-style-qformat:yes;
 	mso-style-link:"question Char";
 	margin-bottom:10.0pt;
-	/*page-break-after:avoid;*/
 	mso-pagination:widow-orphan;
 	font-size:11.0pt;
 	}
  td.question{
  vertical-align:top;
- } 
-  /* question end */
-  
-  /* answer */
+ }
  p.answer, li.answer, div.answer
 	{mso-style-name:answer;
 	mso-style-unhide:no;
@@ -108,7 +103,7 @@ span.square{
      mso-char-type:symbol;
      mso-symbol-font-family:"Wingdings 2";
            }
-  /* answer end */
+
 
   
 table.questionTable{
@@ -145,6 +140,20 @@ p.question_points
 	font-size:11.0pt;
         font-style: italic;
 	
-  }
+  }*/
 
   
+p.question, li.question, div.question,p.question_points,p.question_num{
+    margin-bottom: 0cm;
+    margin-top: 10.0pt;
+}
+body{
+    font-family:"Calibri","serif";
+    font-size:11.5pt;
+}
+td.answer_box, td.answer_a{
+            border-bottom: none; 
+        }
+span.square {
+    display: none;
+}

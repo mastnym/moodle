@@ -302,7 +302,13 @@ p.no_page_break{
 h3{
     margin-bottom:7.0pt;
 }
-/*.cat_340 br.beforeend{
+br.end_346,
+br.end_290,
+br.end_347,
+br.end_351,
+br.end_354 {
     clear:all;
     page-break-after: always;
-}*/
+}
+
+

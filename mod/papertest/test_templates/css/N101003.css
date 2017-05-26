@@ -1,3 +1,16 @@
 .red{
     color:red;
 }
+br.end_999,
+br.end_1002,
+br.end_1005,
+br.end_1009,
+br.end_1012 {
+    clear:all;
+    page-break-after: always;
+}
+/*debug local 5.laboratorni den*/
+br.end_836 {
+    clear:all;
+    page-break-after: always;
+}

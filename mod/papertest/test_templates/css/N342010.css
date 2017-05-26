@@ -13,3 +13,11 @@ td.answer_box, td.answer_a{
 span.square {
     display: none;
 }
+/*přebití předchozího pro zobrazení čtverců ve výsledkách*/
+div.answer_box_result span.square{
+    display:inline;
+}
+/*pokud je výsledek jen částečný je šedě*/
+.partial_result {
+    color: #808080;
+}

@@ -499,8 +499,17 @@ class multichoiceQtype extends generalQtype{
                 $html.=$this->parseChemFormula($answer->answer);
                 $html.="</td>";
                 //crossed square
-                if ($this->generator->results && intval($answer->fraction)>0){
-                        $html.="<td class=answer_box align=right width=\"10%\"><p class=answer_box><span class=square>S</span></p></td>";
+                if ($this->generator->results && floatval($answer->fraction)>0){
+                        $html.="<td class=answer_box align=right width=\"10%\"><div class=\"answer_box_result\"><p class=answer_box>";
+                        if (floatval($answer->fraction)<1){
+                            $html.="<div class=\"partial_result\"><span class=square>S</div></span>";
+                        }else{
+                           $html.="<span class=square>S</span>"; 
+                        }
+                        $html.="</p></div></td>";
+                }
+                else if ($this->generator->results){
+                    $html.="<td class=answer_box align=right width=\"10%\"><div class=\"answer_box_result\"><p class=answer_box><span class=square>*</span></p></div>";
                 }//square
                 else{
                     $html.="<td class=answer_box align=right width=\"10%\"><p class=answer_box><span class=square>*</span>";

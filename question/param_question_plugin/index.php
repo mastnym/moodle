@@ -24,7 +24,7 @@ echo $OUTPUT->header();
 <?php
 $questionbank->display('questions', $pagevars['qpage'], $pagevars['qperpage'],
 		$pagevars['cat'], $pagevars['recurse'], $pagevars['showhidden'],
-		$pagevars['qbshowtext']);
+		$pagevars['qbshowtext'], "");
 ?>
   <table id="tiny_mce">
     <tr>
@@ -222,6 +222,7 @@ function importQuestions(){
 	    type: "POST",
 	    url: "xmlUpload.php",
 	    success: function (data, status) {
+                console.log(data);
 			if (data.startsWith("ok")){
 				var filename=data.substring(2);
 				postToImport(filename);

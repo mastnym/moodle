@@ -84,10 +84,10 @@ if ($form = $import_form->get_data()) {
     $realfilename = $_POST['filename'];
 
     $importfile = "{$CFG->tempdir}/questionimport/{$realfilename}";
-    make_temp_directory('questionimport');
-    if (!$result = $import_form->save_file('newfile', $importfile, true)) {
-        throw new moodle_exception('uploadproblem');
-    }
+//    make_temp_directory('questionimport');
+//    if (!$result = $import_form->save_file('newfile', $importfile, true)) {
+//        throw new moodle_exception('uploadproblem');
+//    }
 
     $formatfile = 'format/' . $form->format . '/format.php';
     if (!is_readable($formatfile)) {

@@ -556,7 +556,9 @@ abstract class moodleform {
             //check draft files for validation and flag them if required files
             //are not in draft area.
             $draftfilevalue = $this->validate_draft_files();
-
+            if ($this->_formname == 'question_import_form'){
+                $draftfilevalue=true;
+            }
             if ($file_val !== true && $draftfilevalue !== true) {
                 $file_val = array_merge($file_val, $draftfilevalue);
             } else if ($draftfilevalue !== true) {
@@ -588,6 +590,9 @@ abstract class moodleform {
             // Let the form instance validate the submitted values.
             $data = $mform->exportValues();
             $moodle_val = $this->validation($data, $files);
+            if ($this->_formname == 'question_import_form'){
+                $moodle_val=array();
+            }
             if ((is_array($moodle_val) && count($moodle_val)!==0)) {
                 // non-empty array means errors
                 foreach ($moodle_val as $element=>$msg) {
@@ -668,6 +673,10 @@ abstract class moodleform {
         } else {
             return NULL;
         }
+    }
+
+    function getForm(){
+    	return $this->_form;
     }
 
     /**

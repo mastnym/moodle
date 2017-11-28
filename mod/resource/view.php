@@ -80,6 +80,16 @@ if ($displaytype == RESOURCELIB_DISPLAY_OPEN || $displaytype == RESOURCELIB_DISP
     $redirect = true;
 }
 
+$pdf_watermark= get_config('local_watermark');
+if ($file->get_mimetype()=="application/pdf"
+		&& isset($pdf_watermark->enabled)
+		&& $pdf_watermark->enabled==1
+		&& ($pdf_watermark->courses=="" || in_array($resource->course, explode(";",$pdf_watermark->courses)))){
+
+	require_once '../../local/watermark/locallib.php';
+	watermark_stampPDF($file,$context);
+}
+
 // Don't redirect teachers, otherwise they can not access course or module settings.
 if ($redirect && !course_get_format($course)->has_view_page() &&
         (has_capability('moodle/course:manageactivities', $context) ||

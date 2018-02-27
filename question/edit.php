@@ -57,9 +57,9 @@ $questionbank->display('questions', $pagevars['qpage'], $pagevars['qperpage'],
         $pagevars['cat'], $pagevars['recurse'], $pagevars['showhidden'],
         $pagevars['qbshowtext']);
 if (isset($CFG->param_question_subjects[$COURSE->shortname])){
-	echo '<a href="param_question_plugin/index.php?courseid='.$COURSE->id.'">Vložit parametrickou otázku</a> (Vyžaduje zapnutý Javascript a moderní prohlížeè - IE 10, Firefox 20+, Chrome 25+)';
+	echo '<a href="param_question_plugin/index.php?courseid='.$COURSE->id.'">VloÅ¾it parametrickou otÃ¡zku</a>';
   echo '<br/>';
-  echo '<a href="param_question_plugin/sablona.xlsx">Zde si mùžete stánout šablonu pro Excel.</a>'   ;
+  echo '<a href="param_question_plugin/sablona.xlsx">Zde si mÅ¯Å¾ete stÃ¡hnout Å¡ablonu pro Excel.</a>'   ;
 }
 echo "</div>\n";
 

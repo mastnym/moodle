@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use core\persistent;
 
+require_once($CFG->dirroot.'/user/profile/lib.php');
 /**
  * Class for loading/storing oauth2 user field mappings from the DB
  *
@@ -47,6 +48,17 @@ class user_field_mapping extends persistent {
     }
 
     /**
+     * Return the list of valid custom profile user fields.
+     *
+     * @return array array of profile fields
+     */
+    private static function get_custom_user_fields() {
+        return array_map(function($o) {
+                return $o->inputname;
+        }, profile_get_user_fields_with_data(0));
+    }
+
+    /**
      * Return the definition of the properties of this model.
      *
      * @return array
@@ -57,11 +69,11 @@ class user_field_mapping extends persistent {
                 'type' => PARAM_INT
             ),
             'externalfield' => array(
-                'type' => PARAM_ALPHANUMEXT,
+                'type' => PARAM_RAW_TRIMMED,
             ),
             'internalfield' => array(
                 'type' => PARAM_ALPHANUMEXT,
-                'choices' => self::get_user_fields()
+                'choices' => array_merge(self::get_user_fields(), self::get_custom_user_fields())
             )
         );
     }
@@ -73,5 +85,25 @@ class user_field_mapping extends persistent {
      */
     public function get_internalfield_list() {
         return array_combine(self::get_user_fields(), self::get_user_fields());
+    }
+
+    /**
+     * Return the list of profile fields
+     * in a format they can be used for choices in a group select menu
+     * @return array array of category name with its profile fields
+     */
+    public function get_customfield_list() {
+        $customfields = profile_get_user_fields_with_data_by_category(0);
+        $data = array();
+        foreach ($customfields as $category) {
+            foreach ($category as $field) {
+                $categoryname = $field->get_category_name();
+                if (!isset($data[$categoryname])) {
+                    $data[$categoryname] = array();
+                }
+                $data[$categoryname][$field->inputname] = $field->field->name;
+            }
+        }
+        return $data;
     }
 }

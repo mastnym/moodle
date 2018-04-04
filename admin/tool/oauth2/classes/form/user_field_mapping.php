@@ -58,9 +58,15 @@ class user_field_mapping extends persistent {
         $mform->addRule('externalfield', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
         $mform->addHelpButton('externalfield', 'userfieldexternalfield', 'tool_oauth2');
 
+        $choices = array();
         // Internal.
-        $choices = $userfieldmapping->get_internalfield_list();
-        $mform->addElement('select', 'internalfield', get_string('userfieldinternalfield', 'tool_oauth2'), $choices);
+        $profilefieldslabel = get_string('profilefields', 'admin');
+        $profilefields = array($profilefieldslabel => $userfieldmapping->get_internalfield_list());
+        // Custom fields.
+        $customfields = $userfieldmapping->get_customfield_list();;
+        $choices = array_merge($profilefields, $customfields);
+
+        $mform->addElement('selectgroups', 'internalfield', get_string('userfieldinternalfield', 'tool_oauth2'), $choices);
         $mform->addHelpButton('internalfield', 'userfieldinternalfield', 'tool_oauth2');
 
         $mform->addElement('hidden', 'action', 'edit');

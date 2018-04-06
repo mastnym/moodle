@@ -104,7 +104,7 @@ class user_field_mapping extends persistent {
      * Return the list of profile fields
      * in a format they can be used for choices in a group select menu
      * @return array array of category name with its profile fields
-     *
+     */
     public function get_customfield_list() {
         $customfields = profile_get_user_fields_with_data_by_category(0);
         $data = array();

@@ -363,7 +363,7 @@ class api {
      * @param issuer $issuer
      * @return int The number of discovered services.
      */
-    protected static function discover_endpoints($issuer) {
+    protected static function discover_endpoints($issuer, $update) {
         $curl = new curl();
 
         if (empty($issuer->get('baseurl'))) {
@@ -390,55 +390,73 @@ class api {
             throw new moodle_exception($msg);
         }
 
-        foreach (endpoint::get_records(['issuerid' => $issuer->get('id')]) as $endpoint) {
-            if ($endpoint->get('name') != 'discovery_endpoint') {
-                $endpoint->delete();
-            }
+        // Update scopes first - separate from endpoints.
+        if (isset($info->scopes_supported)) {
+            $issuer->set('scopessupported', implode(' ', $info->scopes_supported));
+            $issuer->update();
         }
 
+        // Go thru all known endpoints during update and update these.
+        $previousendpointnames = [];
+        if ($update) {
+            $previousendpoints = endpoint::get_records(['issuerid' => $issuer->get('id')]);
+            foreach ($previousendpoints as $endpoint) {
+                $endpointname = $endpoint->get('name');
+                // Remember that this name was updated.
+                $previousendpointnames[] = $endpointname;
+                if ($endpointname == 'discovery_endpoint') {
+                    continue;
+                }
+                if (isset($info->$endpointname)) {
+                    $endpoint->url = $info->$endpointname;
+                    $endpoint->update();
+                }
+                // If endpoint defined locally does not come from server.
+                // Do nothing. This means that endpoint was defined by user.
+            }
+        }
         foreach ($info as $key => $value) {
             if (substr_compare($key, '_endpoint', - strlen('_endpoint')) === 0) {
-                $record = new stdClass();
-                $record->issuerid = $issuer->get('id');
-                $record->name = $key;
-                $record->url = $value;
+                // Create only when not updating issuer or when this endpoint was not found locally.
+                if (!($update and in_array($key, $previousendpointnames))) {
+                    $record = new stdClass();
+                    $record->issuerid = $issuer->get('id');
+                    $record->name = $key;
+                    $record->url = $value;
 
-                $endpoint = new endpoint(0, $record);
-                $endpoint->create();
-            }
-
-            if ($key == 'scopes_supported') {
-                $issuer->set('scopessupported', implode(' ', $value));
-                $issuer->update();
+                    $endpoint = new endpoint(0, $record);
+                    $endpoint->create();
+                }
             }
         }
 
         // We got to here - must be a decent OpenID connect service. Add the default user field mapping list.
-        foreach (user_field_mapping::get_records(['issuerid' => $issuer->get('id')]) as $userfieldmapping) {
-            $userfieldmapping->delete();
-        }
 
-        // Create the field mappings.
-        $mapping = [
-            'given_name' => 'firstname',
-            'middle_name' => 'middlename',
-            'family_name' => 'lastname',
-            'email' => 'email',
-            'website' => 'url',
-            'nickname' => 'alternatename',
-            'picture' => 'picture',
-            'address' => 'address',
-            'phone' => 'phone1',
-            'locale' => 'lang'
-        ];
-        foreach ($mapping as $external => $internal) {
-            $record = (object) [
-                'issuerid' => $issuer->get('id'),
-                'externalfield' => $external,
-                'internalfield' => $internal
+        // There is a separate view for defining user mappings, so leave these as is when updating.
+        // It should be admins responsibility to redefine when there's a major change.
+        if (!$update) {
+            // Create the field mappings.
+            $mapping = [
+                'given_name' => 'firstname',
+                'middle_name' => 'middlename',
+                'family_name' => 'lastname',
+                'email' => 'email',
+                'website' => 'url',
+                'nickname' => 'alternatename',
+                'picture' => 'picture',
+                'address' => 'address',
+                'phone' => 'phone1',
+                'locale' => 'lang'
             ];
-            $userfieldmapping = new user_field_mapping(0, $record);
-            $userfieldmapping->create();
+            foreach ($mapping as $external => $internal) {
+                $record = (object) [
+                    'issuerid' => $issuer->get('id'),
+                    'externalfield' => $external,
+                    'internalfield' => $internal
+                ];
+                $userfieldmapping = new user_field_mapping(0, $record);
+                $userfieldmapping->create();
+            }
         }
 
         return endpoint::count_records(['issuerid' => $issuer->get('id')]);
@@ -458,7 +476,7 @@ class api {
         $issuer->update();
 
         // Perform service discovery.
-        self::discover_endpoints($issuer);
+        self::discover_endpoints($issuer, true);
         self::guess_image($issuer);
         return $issuer;
     }
@@ -477,7 +495,7 @@ class api {
         $issuer->create();
 
         // Perform service discovery.
-        self::discover_endpoints($issuer);
+        self::discover_endpoints($issuer, false);
         self::guess_image($issuer);
         return $issuer;
     }

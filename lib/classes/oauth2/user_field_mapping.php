@@ -97,6 +97,17 @@ class user_field_mapping extends persistent {
         if (clean_param($value, PARAM_NOTAGS) !== $value){
             return new lang_string('userfieldexternalfield_error', 'tool_oauth2');
         }
+        // Check if there are no duplicates values defined.
+        $issuer = \core\oauth2\api::get_issuer($this->get('issuerid'));
+        $userfieldmappings = \core\oauth2\api::get_user_field_mappings($issuer);
+        foreach ($userfieldmappings as $userfieldmapping) {
+            if (($this->get('externalfield') == $userfieldmapping->get('externalfield')) &&
+                    ($this->get('id') != $userfieldmapping->get('id'))) {
+                return new lang_string('userfieldexternalfieldduplicate_error',
+                    'tool_oauth2',
+                    $this->get('externalfield'));
+            }
+        }
         return true;
     }
 

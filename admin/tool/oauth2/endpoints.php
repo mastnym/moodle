@@ -93,7 +93,9 @@ if ($mform && $mform->is_cancelled()) {
         $mform->display();
         echo $OUTPUT->footer();
     }
-
+} else if ($action == 'update') {
+    core\oauth2\api::update_endpoints($issuer);
+    redirect($PAGE->url, get_string('changessaved'), null, \core\output\notification::NOTIFY_SUCCESS);
 } else if ($action == 'delete') {
 
     if (!optional_param('confirm', false, PARAM_BOOL)) {
@@ -123,6 +125,8 @@ if ($mform && $mform->is_cancelled()) {
     echo $renderer->endpoints_table($endpoints, $issuerid);
 
     $addurl = new moodle_url('/admin/tool/oauth2/endpoints.php', ['action' => 'edit', 'issuerid' => $issuerid]);
+    $updateurl = new moodle_url('/admin/tool/oauth2/endpoints.php', ['action' => 'update', 'issuerid' => $issuerid]);
     echo $renderer->single_button($addurl, get_string('createnewendpoint', 'tool_oauth2', s($issuer->get('name'))));
+    echo $renderer->single_button($updateurl, get_string('updatecurrentendpoints', 'tool_oauth2'));
     echo $OUTPUT->footer();
 }

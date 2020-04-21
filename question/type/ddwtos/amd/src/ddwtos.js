@@ -54,53 +54,9 @@ define(['jquery', 'core/dragdrop', 'core/key_codes'], function($, dragDrop, keys
         if (readOnly) {
             this.getRoot().addClass('qtype_ddwtos-readonly');
         }
-        this.resizeAllDragsAndDrops();
         this.cloneDrags();
         this.positionDrags();
     }
-
-    /**
-     * In each group, resize all the items to be the same size.
-     */
-    DragDropToTextQuestion.prototype.resizeAllDragsAndDrops = function() {
-        var thisQ = this;
-        this.getRoot().find('.answercontainer > div').each(function(i, node) {
-            thisQ.resizeAllDragsAndDropsInGroup(
-                thisQ.getClassnameNumericSuffix($(node), 'draggrouphomes'));
-        });
-    };
-
-    /**
-     * In a given group, set all the drags and drops to be the same size.
-     *
-     * @param {int} group the group number.
-     */
-    DragDropToTextQuestion.prototype.resizeAllDragsAndDropsInGroup = function(group) {
-        var thisQ = this,
-            dragHomes = this.getRoot().find('.draggrouphomes' + group + ' span.draghome'),
-            maxWidth = 0,
-            maxHeight = 0;
-
-        // Find the maximum size of any drag in this groups.
-        dragHomes.each(function(i, drag) {
-            maxWidth = Math.max(maxWidth, Math.ceil(drag.offsetWidth));
-            maxHeight = Math.max(maxHeight, Math.ceil(0 + drag.offsetHeight));
-        });
-
-        // The size we will want to set is a bit bigger than this.
-        maxWidth += 8;
-        maxHeight += 2;
-
-        // Set each drag home to that size.
-        dragHomes.each(function(i, drag) {
-            thisQ.setElementSize(drag, maxWidth, maxHeight);
-        });
-
-        // Set each drop to that size.
-        this.getRoot().find('span.drop.group' + group).each(function(i, drop) {
-            thisQ.setElementSize(drop, maxWidth, maxHeight);
-        });
-    };
 
     /**
      * Set a given DOM element to be a particular size.
@@ -239,13 +195,23 @@ define(['jquery', 'core/dragdrop', 'core/key_codes'], function($, dragDrop, keys
      * @param {jQuery} drag the item being moved.
      */
     DragDropToTextQuestion.prototype.dragMove = function(pageX, pageY, drag) {
-        var thisQ = this;
+        var thisQ = this,
+            pointInDrop = false;
+
         this.getRoot().find('span.drop.group' + this.getGroup(drag)).each(function(i, dropNode) {
             var drop = $(dropNode);
             if (thisQ.isPointInDrop(pageX, pageY, drop)) {
                 drop.addClass('valid-drag-over-drop');
+                pointInDrop = true;
             } else {
                 drop.removeClass('valid-drag-over-drop');
+            }
+            if (pointInDrop) {
+                drag.addClass('drag-over-valid-drop');
+                drag.offset({top: pageY, left: pageX});
+            } else {
+                drag.removeClass('drag-over-valid-drop');
+                drag.offset({top: pageY, left: pageX});
             }
         });
         this.getRoot().find('span.draghome.placed.group' + this.getGroup(drag)).not('.beingdragged').each(function(i, dropNode) {

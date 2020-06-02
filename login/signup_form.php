@@ -36,22 +36,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
 
         $mform = $this->_form;
 
-        $mform->addElement('text', 'username', get_string('username'), 'maxlength="100" size="12" autocapitalize="none"');
-        $mform->setType('username', PARAM_RAW);
-        $mform->addRule('username', get_string('missingusername'), 'required', null, 'client');
-
-        if (!empty($CFG->passwordpolicy)){
-            $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
-        }
-        $mform->addElement('password', 'password', get_string('password'), [
-            'maxlength' => MAX_PASSWORD_CHARACTERS,
-            'size' => 12,
-            'autocomplete' => 'new-password'
-        ]);
-        $mform->setType('password', core_user::get_property_type('password'));
-        $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
-        $mform->addRule('password', get_string('maximumchars', '', MAX_PASSWORD_CHARACTERS),
-            'maxlength', MAX_PASSWORD_CHARACTERS, 'client');
+        $mform->addElement('header', 'createuserandpass', get_string('createuserandpass'), '');
 
         $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25"');
         $mform->setType('email', core_user::get_property_type('email'));
@@ -62,6 +47,18 @@ class login_signup_form extends moodleform implements renderable, templatable {
         $mform->setType('email2', core_user::get_property_type('email'));
         $mform->addRule('email2', get_string('missingemail'), 'required', null, 'client');
         $mform->setForceLtr('email2');
+
+        $mform->addElement('hidden', 'username', 'email');
+        $mform->setType('username', PARAM_RAW);
+
+        if (!empty($CFG->passwordpolicy)){
+            $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
+        }
+        $mform->addElement('password', 'password', get_string('password'), 'maxlength="32" size="12"');
+        $mform->setType('password', core_user::get_property_type('password'));
+        $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
+
+        $mform->addElement('header', 'supplyinfo', get_string('supplyinfo'),'');
 
         $namefields = useredit_get_required_name_fields();
         foreach ($namefields as $field) {
@@ -115,6 +112,11 @@ class login_signup_form extends moodleform implements renderable, templatable {
 
     function definition_after_data(){
         $mform = $this->_form;
+        $email = $mform->exportValue('email');
+        if ($email != null){
+            $mform->getElement('username')->setValue($email);
+            $mform->_submitValues['username'] = $email;
+        }
         $mform->applyFilter('username', 'trim');
 
         // Trim required name fields.
@@ -150,7 +152,11 @@ class login_signup_form extends moodleform implements renderable, templatable {
         }
 
         $errors += signup_validate_data($data, $files);
-
+        // all errors that belong to username go to email
+        if (isset($errors['username']) and ! isset($errors['email'])){
+            $errors['email'] = $errors['username'];
+            unset($errors['username']);
+        }
         return $errors;
     }
 

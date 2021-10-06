@@ -28,9 +28,9 @@ require_once($CFG->dirroot.'/cohort/lib.php');
 require_once($CFG->dirroot.'/cohort/edit_form.php');
 
 $id        = optional_param('id', 0, PARAM_INT);
+$ids = optional_param_array('ids', [], PARAM_INT);
 $contextid = optional_param('contextid', 0, PARAM_INT);
-$cohortids = optional_param_array('cohortids', '', PARAM_SEQUENCE);
-$confirmedcohortids = optional_param('confirmedcohortids', '', PARAM_ALPHANUMEXT);
+#$confirmedcohortids = optional_param('confirmedcohortids', '', PARAM_ALPHANUMEXT);
 $delete    = optional_param('delete', 0, PARAM_BOOL);
 $show      = optional_param('show', 0, PARAM_BOOL);
 $hide      = optional_param('hide', 0, PARAM_BOOL);
@@ -82,10 +82,18 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
     navigation_node::override_active_url(new moodle_url('/cohort/index.php', array()));
 }
 
-if ($delete and $cohort->id) {
+// If we have one or more cohorts
+if ($delete and ($cohort->id || $ids)) {
     $PAGE->url->param('delete', 1);
+    if ($cohort->id){
+        $cohorts = [$cohort->id => $cohort];
+    }else{
+        $cohorts = cohort_get_cohorts_by_ids($ids);
+    }
     if ($confirm and confirm_sesskey()) {
-        cohort_delete_cohort($cohort);
+        foreach ($cohorts as $cohort) {
+            cohort_delete_cohort($cohort);
+        }
         redirect($returnurl);
     }
     $strheading = get_string('delcohort', 'cohort');
@@ -94,9 +102,23 @@ if ($delete and $cohort->id) {
     $PAGE->set_heading($COURSE->fullname);
     echo $OUTPUT->header();
     echo $OUTPUT->heading($strheading);
-    $yesurl = new moodle_url('/cohort/edit.php', array('id' => $cohort->id, 'delete' => 1,
-        'confirm' => 1, 'sesskey' => sesskey(), 'returnurl' => $returnurl->out_as_local_url()));
-    $message = get_string('delconfirm', 'cohort', format_string($cohort->name));
+    $yesurlparams = array('delete' => 1, 'confirm' => 1, 'sesskey' => sesskey(),
+            'returnurl' => $returnurl->out_as_local_url(),  'contextid' => $context->id);
+    if ($cohort->id){
+        $yesurlparams['id'] = $cohort->id;
+        $names = $cohort->name;
+    }else{
+        $names = [];
+        $i = 1;
+        foreach ($cohorts as $cohort){
+            $names[] = $cohort->name;
+            $yesurlparams["ids[$i]"] = $cohort->id;
+            $i++;
+        }
+        $names = implode(', ', $names);
+    }
+    $yesurl = new moodle_url('/cohort/edit.php', $yesurlparams);
+    $message = get_string('delconfirm', 'cohort', format_string($names));
     echo $OUTPUT->confirm($message, $yesurl, $returnurl);
     echo $OUTPUT->footer();
     die;

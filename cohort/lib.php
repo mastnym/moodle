@@ -441,6 +441,30 @@ function cohort_get_cohorts($contextid, $page = 0, $perpage = 25, $search = '') 
 }
 
 /**
+ * Get all the cohorts by their ids.
+ *
+ * The function does not check user capability to view/manage cohorts in the given context
+ * assuming that it has been already verified.
+ *
+ * @param array $ids Ids of cohorts to be returned
+ * @return array  Array of cohorts matching ids
+ */
+function cohort_get_cohorts_by_ids($ids) {
+    global $DB;
+    if (count($ids) == 0){
+        return [];
+    }
+    list($insql, $inparams) = $DB->get_in_or_equal($ids);
+    $sql = " SELECT *
+             FROM {cohort}
+             WHERE id $insql";
+
+    $cohorts = $DB->get_records_sql($sql, $inparams);
+
+    return $cohorts;
+}
+
+/**
  * Get all the cohorts defined anywhere in system.
  *
  * The function assumes that user capability to view/manage cohorts on system level

@@ -98,11 +98,7 @@ if ($showall) {
     $params['showall'] = true;
 }
 
-if ($selectall) {
-    $params['selectall'] = false;
-} else {
-    $params['selectall'] = true;
-}
+$params['selectall'] = $selectall;
 
 $baseurl = new moodle_url('/cohort/index.php', $params);
 
@@ -134,7 +130,7 @@ $data = array();
 $editcolumnisempty = true;
 foreach($cohorts['cohorts'] as $cohort) {
     $line = array();
-    $line[] = html_writer::checkbox('cohortids[]', $cohort->id, $selectall, '', array('id' => 'cohort_id_' . $cohort->id));
+    $line[] = html_writer::checkbox('ids[]', $cohort->id, $selectall, '', array('id' => 'cohort_id_' . $cohort->id));
     $cohortcontext = context::instance_by_id($cohort->contextid);
     $cohort->description = file_rewrite_pluginfile_urls($cohort->description, 'pluginfile.php', $cohortcontext->id,
             'cohort', 'description', $cohort->id);
@@ -231,14 +227,18 @@ echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'contex
 echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()));
 
 if (!empty($cohorts['cohorts'])) {
-    $controls = html_writer::link($baseurl, get_string('selectallornone', 'form'), array('id' => 'cohorts_check_all_none'));
-    $controls .= html_writer::empty_tag('br');
+    // selectall param has to be reverted to allow opposite action
+    $selectalllinkparams = $params;
+    $selectalllinkparams['selectall'] = !$selectall;
+    $selectalllinkurl = new moodle_url('/cohort/index.php', $selectalllinkparams);
+    $selectalllink = html_writer::link($selectalllinkurl, get_string('selectallornone', 'form'), array('id' => 'cohorts_check_all_none'));
+    $controls = html_writer::div($selectalllink, 'select-all-link');
     $attributes = array(
             'type'  => 'submit',
             'name'  => 'delete',
-            'value' => get_string('delcohorts', 'cohort'));
-    $controls .= html_writer::empty_tag('input', $attributes);
-
+            'value' => 1);
+    $submitbutton = html_writer::nonempty_tag('button', get_string('delcohorts', 'cohort'), $attributes);
+    $controls .= html_writer::div($submitbutton, 'select-all-link');
     echo $controls;
 }
 echo html_writer::end_tag('form');

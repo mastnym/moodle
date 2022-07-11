@@ -5952,20 +5952,11 @@ trait restore_questions_attempt_data_trait {
      * @return restore_qtype_plugin instance.
      */
     protected function get_qtype_restorer($qtype) {
-        // Build one static cache to store {@link restore_qtype_plugin}
-        // while we are needing them, just to save zillions of instantiations
-        // or using static stuff that will break our nice API
-        static $qtypeplugins = array();
-
-        if (!isset($qtypeplugins[$qtype])) {
-            $classname = 'restore_qtype_' . $qtype . '_plugin';
-            if (class_exists($classname)) {
-                $qtypeplugins[$qtype] = new $classname('qtype', $qtype, $this);
-            } else {
-                $qtypeplugins[$qtype] = null;
-            }
+        $classname = 'restore_qtype_' . $qtype . '_plugin';
+        if (class_exists($classname)) {
+            return new $classname('qtype', $qtype, $this);
         }
-        return $qtypeplugins[$qtype];
+        return null;
     }
 
     protected function after_execute() {

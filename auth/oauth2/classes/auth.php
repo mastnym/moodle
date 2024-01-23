@@ -342,7 +342,9 @@ class auth extends \auth_plugin_base {
             // We should update fields that meet the following criteria:
             // - Lock value set to 'unlocked'; or 'unlockedifempty', given the current value is empty.
             // - The value has changed.
-            if ($lockvalue === 'unlocked' || ($lockvalue === 'unlockedifempty' && empty($oldvalue))) {
+            // true is added beacuse we want to always synchronize these fields
+            // as described in MDL-80678
+            if (true || $lockvalue === 'unlocked' || ($lockvalue === 'unlockedifempty' && empty($oldvalue))) {
                 $value = (string)$value;
                 if ($oldvalue !== $value) {
                     $user->$fieldname = $value;

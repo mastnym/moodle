@@ -448,7 +448,10 @@ class page_requirements_manager {
             debugging('The question/qengine.js has been deprecated. ' .
                 'Please use core_question/question_engine', DEBUG_DEVELOPER);
         }
-        $url = $this->js_fix_url($url);
+        // url na /cis-mjs se nijak nefixují, aby se je moodle nesnažil cachovat
+        if (!($url instanceof moodle_url && str_starts_with($url->get_path(), '/cis-mjs'))){
+            $url = $this->js_fix_url($url);
+        }
         $where = $inhead ? 'head' : 'footer';
         $this->jsincludes[$where][$url->out()] = $url;
     }

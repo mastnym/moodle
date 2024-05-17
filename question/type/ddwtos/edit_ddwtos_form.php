@@ -41,14 +41,41 @@ class qtype_ddwtos_edit_form extends qtype_gapselect_edit_form_base {
 
     protected function data_preprocessing_choice($question, $answer, $key) {
         $question = parent::data_preprocessing_choice($question, $answer, $key);
+        // set the answer back as an array together with format
+        $question->choices[$key]['answer'] = [];
+        $question->choices[$key]['answer']['text'] = $answer->answer;
+        $question->choices[$key]['answer']['format'] = $answer->answerformat;
         $options = unserialize_object($answer->feedback);
         $question->choices[$key]['choicegroup'] = $options->draggroup ?? 1;
         $question->choices[$key]['infinite'] = !empty($options->infinite);
         return $question;
     }
+    public function definition_after_data(){
+        // check each choice and if the 'choices[answer]' is array, then it is submitted via html editor
+        // and the rest of the code is not ready for that
+        // TODO - find a way to ensure compatibility between textarea and editor in a way of handling output
+        foreach ($this->_form->_submitValues['choices'] as $key=>$value){
+            if (is_array($value['answer'])){
+                $answer_html = $value['answer']['text'];
+                // replace the root p tag submitted by tinymce
+                $ptagregex = "~<\s*/?\s*p\b\s*[^>]*>~";
+                $answer_html = preg_replace($ptagregex, '', $answer_html);
+                $this->_form->_submitValues['choices'][$key]['answer'] = $answer_html;
+            }
+        }
+        parent::definition_after_data();
+    }
 
     protected function choice_group($mform) {
-        $grouparray = parent::choice_group($mform);
+        $options = array();
+        for ($i = 1; $i <= $this->get_maximum_choice_group_number(); $i += 1) {
+            $options[$i] = question_utils::int_to_letter($i);
+        }
+        $grouparray = array();
+        $grouparray[] = $mform->createElement('editor', 'answer',
+                get_string('answer', 'qtype_gapselect'), array('size' => 30, 'class' => 'tweakcss ddwtoshtml'));
+        $grouparray[] = $mform->createElement('select', 'choicegroup',
+                get_string('group', 'qtype_gapselect'), $options);
         $grouparray[] = $mform->createElement('checkbox', 'infinite', get_string('infinite', 'qtype_ddwtos'), '', null,
                 array('size' => 1, 'class' => 'tweakcss'));
         return $grouparray;

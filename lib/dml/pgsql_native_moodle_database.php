@@ -1134,7 +1134,7 @@ class pgsql_native_moodle_database extends moodle_database {
             throw new coding_exception('moodle_database::insert_record_raw() no fields found.');
         }
 
-        $fields = implode(',', array_keys($params));
+        $fields = implode(',', array_map(function($field){return '"'.$field.'"';}, array_keys($params)));
         $values = array();
         $i = 1;
         foreach ($params as $value) {
